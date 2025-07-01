@@ -1506,3 +1506,338 @@
 {"level":"info","message":"Attempting login for email: validate.test@example.com","timestamp":"2025-07-01T20:35:32.993Z"}
 {"level":"info","message":"User found, checking password...","timestamp":"2025-07-01T20:35:32.996Z"}
 {"level":"info","message":"Login successful for: validate.test@example.com","timestamp":"2025-07-01T20:35:33.232Z"}
+{"level":"info","message":"Cache cleanup timer started","timestamp":"2025-07-01T20:53:13.027Z"}
+{"count":4,"level":"info","message":"Default report templates initialized","timestamp":"2025-07-01T20:53:13.032Z"}
+{"level":"info","message":"Report schedule processor started","timestamp":"2025-07-01T20:53:13.032Z"}
+{"level":"info","message":"Analytics periodic updates started","timestamp":"2025-07-01T20:53:13.283Z"}
+{"level":"info","message":"Performance monitoring started","timestamp":"2025-07-01T20:53:13.425Z"}
+{"level":"info","message":"Socket.IO server initialized successfully","timestamp":"2025-07-01T20:53:13.490Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-07-01T20:53:13.495Z"}
+{"level":"info","message":"CORS enabled for http://localhost:3000","timestamp":"2025-07-01T20:53:13.496Z"}
+{"level":"info","message":"Socket.IO server ready for real-time connections","timestamp":"2025-07-01T20:53:13.496Z"}
+{"level":"info","message":"Performance monitoring active","timestamp":"2025-07-01T20:53:13.497Z"}
+{"level":"info","message":"Error tracking system initialized","timestamp":"2025-07-01T20:53:13.497Z"}
+{"level":"info","message":"Backup system ready","timestamp":"2025-07-01T20:53:13.497Z"}
+{"level":"info","message":"Lazy loading service initialized","timestamp":"2025-07-01T20:53:13.497Z"}
+{"level":"info","message":"🚀 Phase 7 optimization features fully activated!","timestamp":"2025-07-01T20:53:13.498Z"}
+{"level":"info","message":"System alert sent KPIs updated","timestamp":"2025-07-01T20:53:13.665Z","type":"info"}
+{"activeCustomers":0,"inventoryTurnover":0,"level":"info","message":"All KPIs updated successfully","orderCount":0,"timestamp":"2025-07-01T20:53:13.666Z","totalRevenue":0}
+{"count":5,"level":"info","message":"KPIs initialized","timestamp":"2025-07-01T20:53:13.666Z"}
+{"level":"info","message":"SMTP server is ready to send emails","timestamp":"2025-07-01T20:53:15.647Z"}
+{"level":"info","message":"Attempting login for email: sohandesignz@gmail.com","timestamp":"2025-07-01T20:53:56.982Z"}
+{"level":"info","message":"Attempting login for email: sohandesignz@gmail.com","timestamp":"2025-07-01T20:53:56.982Z"}
+{"level":"info","message":"No user found with email: sohandesignz@gmail.com","timestamp":"2025-07-01T20:53:57.026Z"}
+{"endpoint":"/api/auth/login","errorId":"err_1751403237027_30bfykou8","level":"error","message":"Error tracked Invalid email or password","timestamp":"2025-07-01T20:53:57.033Z"}
+{"level":"error","message":"Error: Invalid email or password","name":"AppError","stack":"AppError: Invalid email or password\n    at AuthService.<anonymous> (C:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\src\\services\\auth.service.ts:186:15)\n    at Generator.next (<anonymous>)\n    at fulfilled (C:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\src\\services\\auth.service.ts:38:58)","status":"error","statusCode":401,"timestamp":"2025-07-01T20:53:57.033Z"}
+{"level":"warn","message":"High memory usage detected","timestamp":"2025-07-01T20:54:13.426Z","usage":92}
+{"level":"info","message":"System alert sent High memory usage: 92%","timestamp":"2025-07-01T20:54:13.427Z","type":"warning"}
+{"errorRate":100,"level":"warn","message":"High error rate detected","timestamp":"2025-07-01T20:54:13.428Z"}
+{"level":"info","message":"System alert sent High error rate: 100%","timestamp":"2025-07-01T20:54:13.428Z","type":"warning"}
+{"level":"info","message":"System alert sent System metrics updated","timestamp":"2025-07-01T20:54:13.428Z","type":"info"}
+{"level":"info","message":"Verification email sent:","timestamp":"2025-07-01T20:54:20.341Z"}
+{"endpoint":"/api/auth/verify-email/c4da09a119c3c9e2078b8fb94043f7226368950c01c00f8a5df1217fe64e409f","errorId":"err_1751403274716_8j9p5iem2","level":"error","message":"Error tracked Invalid or expired verification token","timestamp":"2025-07-01T20:54:34.716Z"}
+{"level":"error","message":"Error: Invalid or expired verification token","name":"AppError","stack":"AppError: Invalid or expired verification token\n    at AuthService.<anonymous> (C:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\src\\services\\auth.service.ts:98:15)\n    at Generator.next (<anonymous>)\n    at fulfilled (C:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\src\\services\\auth.service.ts:38:58)","status":"error","statusCode":400,"timestamp":"2025-07-01T20:54:34.717Z"}
+{"level":"warn","message":"High memory usage detected","timestamp":"2025-07-01T20:55:13.435Z","usage":96}
+{"level":"info","message":"System alert sent High memory usage: 96%","timestamp":"2025-07-01T20:55:13.437Z","type":"warning"}
+{"errorRate":33.33,"level":"warn","message":"High error rate detected","timestamp":"2025-07-01T20:55:13.438Z"}
+{"level":"info","message":"System alert sent High error rate: 33.33%","timestamp":"2025-07-01T20:55:13.439Z","type":"warning"}
+{"level":"info","message":"System alert sent System metrics updated","timestamp":"2025-07-01T20:55:13.441Z","type":"info"}
+{"level":"warn","message":"High memory usage detected","timestamp":"2025-07-01T20:56:13.442Z","usage":89}
+{"level":"info","message":"System alert sent High memory usage: 89%","timestamp":"2025-07-01T20:56:13.444Z","type":"warning"}
+{"level":"info","message":"System alert sent System metrics updated","timestamp":"2025-07-01T20:56:13.446Z","type":"info"}
+{"level":"warn","message":"High memory usage detected","timestamp":"2025-07-01T20:57:13.456Z","usage":89}
+{"level":"info","message":"System alert sent High memory usage: 89%","timestamp":"2025-07-01T20:57:13.458Z","type":"warning"}
+{"level":"info","message":"System alert sent System metrics updated","timestamp":"2025-07-01T20:57:13.460Z","type":"info"}
+{"level":"warn","message":"High memory usage detected","timestamp":"2025-07-01T20:58:13.472Z","usage":89}
+{"level":"info","message":"System alert sent High memory usage: 89%","timestamp":"2025-07-01T20:58:13.474Z","type":"warning"}
+{"level":"info","message":"System alert sent System metrics updated","timestamp":"2025-07-01T20:58:13.475Z","type":"info"}
+{"level":"warn","message":"High memory usage detected","timestamp":"2025-07-01T20:59:13.477Z","usage":89}
+{"level":"info","message":"System alert sent High memory usage: 89%","timestamp":"2025-07-01T20:59:13.478Z","type":"warning"}
+{"level":"info","message":"System alert sent System metrics updated","timestamp":"2025-07-01T20:59:13.480Z","type":"info"}
+{"level":"warn","message":"High memory usage detected","timestamp":"2025-07-01T21:00:13.482Z","usage":90}
+{"level":"info","message":"System alert sent High memory usage: 90%","timestamp":"2025-07-01T21:00:13.485Z","type":"warning"}
+{"level":"info","message":"System alert sent System metrics updated","timestamp":"2025-07-01T21:00:13.486Z","type":"info"}
+{"level":"info","message":"Cache cleanup timer started","timestamp":"2025-07-01T21:00:59.793Z"}
+{"count":4,"level":"info","message":"Default report templates initialized","timestamp":"2025-07-01T21:00:59.800Z"}
+{"level":"info","message":"Report schedule processor started","timestamp":"2025-07-01T21:00:59.801Z"}
+{"level":"info","message":"Analytics periodic updates started","timestamp":"2025-07-01T21:00:59.810Z"}
+{"level":"info","message":"Performance monitoring started","timestamp":"2025-07-01T21:00:59.836Z"}
+{"level":"info","message":"Socket.IO server initialized successfully","timestamp":"2025-07-01T21:00:59.850Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-07-01T21:00:59.855Z"}
+{"level":"info","message":"CORS enabled for http://localhost:3000","timestamp":"2025-07-01T21:00:59.855Z"}
+{"level":"info","message":"Socket.IO server ready for real-time connections","timestamp":"2025-07-01T21:00:59.856Z"}
+{"level":"info","message":"Performance monitoring active","timestamp":"2025-07-01T21:00:59.856Z"}
+{"level":"info","message":"Error tracking system initialized","timestamp":"2025-07-01T21:00:59.857Z"}
+{"level":"info","message":"Backup system ready","timestamp":"2025-07-01T21:00:59.857Z"}
+{"level":"info","message":"Lazy loading service initialized","timestamp":"2025-07-01T21:00:59.858Z"}
+{"level":"info","message":"🚀 Phase 7 optimization features fully activated!","timestamp":"2025-07-01T21:00:59.858Z"}
+{"level":"info","message":"System alert sent KPIs updated","timestamp":"2025-07-01T21:00:59.940Z","type":"info"}
+{"activeCustomers":0,"inventoryTurnover":0,"level":"info","message":"All KPIs updated successfully","orderCount":0,"timestamp":"2025-07-01T21:00:59.940Z","totalRevenue":0}
+{"count":5,"level":"info","message":"KPIs initialized","timestamp":"2025-07-01T21:00:59.941Z"}
+{"level":"info","message":"SMTP server is ready to send emails","timestamp":"2025-07-01T21:01:03.107Z"}
+{"level":"info","message":"Cache cleanup timer started","timestamp":"2025-07-01T21:01:11.642Z"}
+{"count":4,"level":"info","message":"Default report templates initialized","timestamp":"2025-07-01T21:01:11.647Z"}
+{"level":"info","message":"Report schedule processor started","timestamp":"2025-07-01T21:01:11.648Z"}
+{"level":"info","message":"Analytics periodic updates started","timestamp":"2025-07-01T21:01:11.651Z"}
+{"level":"info","message":"Performance monitoring started","timestamp":"2025-07-01T21:01:11.670Z"}
+{"level":"info","message":"Socket.IO server initialized successfully","timestamp":"2025-07-01T21:01:11.676Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-07-01T21:01:11.679Z"}
+{"level":"info","message":"CORS enabled for http://localhost:3000","timestamp":"2025-07-01T21:01:11.680Z"}
+{"level":"info","message":"Socket.IO server ready for real-time connections","timestamp":"2025-07-01T21:01:11.680Z"}
+{"level":"info","message":"Performance monitoring active","timestamp":"2025-07-01T21:01:11.680Z"}
+{"level":"info","message":"Error tracking system initialized","timestamp":"2025-07-01T21:01:11.680Z"}
+{"level":"info","message":"Backup system ready","timestamp":"2025-07-01T21:01:11.681Z"}
+{"level":"info","message":"Lazy loading service initialized","timestamp":"2025-07-01T21:01:11.681Z"}
+{"level":"info","message":"🚀 Phase 7 optimization features fully activated!","timestamp":"2025-07-01T21:01:11.681Z"}
+{"level":"info","message":"System alert sent KPIs updated","timestamp":"2025-07-01T21:01:11.755Z","type":"info"}
+{"activeCustomers":0,"inventoryTurnover":0,"level":"info","message":"All KPIs updated successfully","orderCount":0,"timestamp":"2025-07-01T21:01:11.756Z","totalRevenue":0}
+{"count":5,"level":"info","message":"KPIs initialized","timestamp":"2025-07-01T21:01:11.756Z"}
+{"level":"info","message":"SMTP server is ready to send emails","timestamp":"2025-07-01T21:01:14.422Z"}
+{"level":"info","message":"Cache cleanup timer started","timestamp":"2025-07-01T21:01:28.434Z"}
+{"count":4,"level":"info","message":"Default report templates initialized","timestamp":"2025-07-01T21:01:28.439Z"}
+{"level":"info","message":"Report schedule processor started","timestamp":"2025-07-01T21:01:28.440Z"}
+{"level":"info","message":"Analytics periodic updates started","timestamp":"2025-07-01T21:01:28.444Z"}
+{"level":"info","message":"Performance monitoring started","timestamp":"2025-07-01T21:01:28.462Z"}
+{"level":"info","message":"Socket.IO server initialized successfully","timestamp":"2025-07-01T21:01:28.469Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-07-01T21:01:28.472Z"}
+{"level":"info","message":"CORS enabled for http://localhost:3000","timestamp":"2025-07-01T21:01:28.473Z"}
+{"level":"info","message":"Socket.IO server ready for real-time connections","timestamp":"2025-07-01T21:01:28.473Z"}
+{"level":"info","message":"Performance monitoring active","timestamp":"2025-07-01T21:01:28.473Z"}
+{"level":"info","message":"Error tracking system initialized","timestamp":"2025-07-01T21:01:28.473Z"}
+{"level":"info","message":"Backup system ready","timestamp":"2025-07-01T21:01:28.474Z"}
+{"level":"info","message":"Lazy loading service initialized","timestamp":"2025-07-01T21:01:28.474Z"}
+{"level":"info","message":"🚀 Phase 7 optimization features fully activated!","timestamp":"2025-07-01T21:01:28.474Z"}
+{"level":"info","message":"System alert sent KPIs updated","timestamp":"2025-07-01T21:01:28.550Z","type":"info"}
+{"activeCustomers":0,"inventoryTurnover":0,"level":"info","message":"All KPIs updated successfully","orderCount":0,"timestamp":"2025-07-01T21:01:28.550Z","totalRevenue":0}
+{"count":5,"level":"info","message":"KPIs initialized","timestamp":"2025-07-01T21:01:28.551Z"}
+{"level":"info","message":"SMTP server is ready to send emails","timestamp":"2025-07-01T21:01:30.584Z"}
+{"level":"info","message":"Cache cleanup timer started","timestamp":"2025-07-01T21:01:46.367Z"}
+{"count":4,"level":"info","message":"Default report templates initialized","timestamp":"2025-07-01T21:01:46.374Z"}
+{"level":"info","message":"Report schedule processor started","timestamp":"2025-07-01T21:01:46.374Z"}
+{"level":"info","message":"Analytics periodic updates started","timestamp":"2025-07-01T21:01:46.380Z"}
+{"level":"info","message":"Performance monitoring started","timestamp":"2025-07-01T21:01:46.409Z"}
+{"level":"info","message":"Socket.IO server initialized successfully","timestamp":"2025-07-01T21:01:46.422Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-07-01T21:01:46.428Z"}
+{"level":"info","message":"CORS enabled for http://localhost:3000","timestamp":"2025-07-01T21:01:46.431Z"}
+{"level":"info","message":"Socket.IO server ready for real-time connections","timestamp":"2025-07-01T21:01:46.432Z"}
+{"level":"info","message":"Performance monitoring active","timestamp":"2025-07-01T21:01:46.433Z"}
+{"level":"info","message":"Error tracking system initialized","timestamp":"2025-07-01T21:01:46.434Z"}
+{"level":"info","message":"Backup system ready","timestamp":"2025-07-01T21:01:46.435Z"}
+{"level":"info","message":"Lazy loading service initialized","timestamp":"2025-07-01T21:01:46.436Z"}
+{"level":"info","message":"🚀 Phase 7 optimization features fully activated!","timestamp":"2025-07-01T21:01:46.437Z"}
+{"level":"info","message":"Cache cleanup timer started","timestamp":"2025-07-01T21:01:47.408Z"}
+{"count":4,"level":"info","message":"Default report templates initialized","timestamp":"2025-07-01T21:01:47.413Z"}
+{"level":"info","message":"Report schedule processor started","timestamp":"2025-07-01T21:01:47.414Z"}
+{"level":"info","message":"Analytics periodic updates started","timestamp":"2025-07-01T21:01:47.418Z"}
+{"level":"info","message":"Performance monitoring started","timestamp":"2025-07-01T21:01:47.432Z"}
+{"level":"info","message":"Socket.IO server initialized successfully","timestamp":"2025-07-01T21:01:47.438Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-07-01T21:01:47.441Z"}
+{"level":"info","message":"CORS enabled for http://localhost:3000","timestamp":"2025-07-01T21:01:47.442Z"}
+{"level":"info","message":"Socket.IO server ready for real-time connections","timestamp":"2025-07-01T21:01:47.442Z"}
+{"level":"info","message":"Performance monitoring active","timestamp":"2025-07-01T21:01:47.442Z"}
+{"level":"info","message":"Error tracking system initialized","timestamp":"2025-07-01T21:01:47.443Z"}
+{"level":"info","message":"Backup system ready","timestamp":"2025-07-01T21:01:47.443Z"}
+{"level":"info","message":"Lazy loading service initialized","timestamp":"2025-07-01T21:01:47.443Z"}
+{"level":"info","message":"🚀 Phase 7 optimization features fully activated!","timestamp":"2025-07-01T21:01:47.443Z"}
+{"level":"info","message":"System alert sent KPIs updated","timestamp":"2025-07-01T21:01:47.515Z","type":"info"}
+{"activeCustomers":0,"inventoryTurnover":0,"level":"info","message":"All KPIs updated successfully","orderCount":0,"timestamp":"2025-07-01T21:01:47.516Z","totalRevenue":0}
+{"count":5,"level":"info","message":"KPIs initialized","timestamp":"2025-07-01T21:01:47.516Z"}
+{"level":"info","message":"SMTP server is ready to send emails","timestamp":"2025-07-01T21:01:49.747Z"}
+{"level":"info","message":"Cache cleanup timer started","timestamp":"2025-07-01T21:01:57.101Z"}
+{"count":4,"level":"info","message":"Default report templates initialized","timestamp":"2025-07-01T21:01:57.109Z"}
+{"level":"info","message":"Report schedule processor started","timestamp":"2025-07-01T21:01:57.110Z"}
+{"level":"info","message":"Analytics periodic updates started","timestamp":"2025-07-01T21:01:57.114Z"}
+{"level":"info","message":"Performance monitoring started","timestamp":"2025-07-01T21:01:57.130Z"}
+{"level":"info","message":"Socket.IO server initialized successfully","timestamp":"2025-07-01T21:01:57.138Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-07-01T21:01:57.142Z"}
+{"level":"info","message":"CORS enabled for http://localhost:3000","timestamp":"2025-07-01T21:01:57.143Z"}
+{"level":"info","message":"Socket.IO server ready for real-time connections","timestamp":"2025-07-01T21:01:57.143Z"}
+{"level":"info","message":"Performance monitoring active","timestamp":"2025-07-01T21:01:57.144Z"}
+{"level":"info","message":"Error tracking system initialized","timestamp":"2025-07-01T21:01:57.145Z"}
+{"level":"info","message":"Backup system ready","timestamp":"2025-07-01T21:01:57.146Z"}
+{"level":"info","message":"Lazy loading service initialized","timestamp":"2025-07-01T21:01:57.146Z"}
+{"level":"info","message":"🚀 Phase 7 optimization features fully activated!","timestamp":"2025-07-01T21:01:57.146Z"}
+{"level":"info","message":"System alert sent KPIs updated","timestamp":"2025-07-01T21:01:57.254Z","type":"info"}
+{"activeCustomers":0,"inventoryTurnover":0,"level":"info","message":"All KPIs updated successfully","orderCount":0,"timestamp":"2025-07-01T21:01:57.255Z","totalRevenue":0}
+{"count":5,"level":"info","message":"KPIs initialized","timestamp":"2025-07-01T21:01:57.256Z"}
+{"level":"info","message":"Cache cleanup timer started","timestamp":"2025-07-01T21:01:58.670Z"}
+{"count":4,"level":"info","message":"Default report templates initialized","timestamp":"2025-07-01T21:01:58.674Z"}
+{"level":"info","message":"Report schedule processor started","timestamp":"2025-07-01T21:01:58.675Z"}
+{"level":"info","message":"Analytics periodic updates started","timestamp":"2025-07-01T21:01:58.679Z"}
+{"level":"info","message":"Performance monitoring started","timestamp":"2025-07-01T21:01:58.693Z"}
+{"level":"info","message":"Socket.IO server initialized successfully","timestamp":"2025-07-01T21:01:58.699Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-07-01T21:01:58.702Z"}
+{"level":"info","message":"CORS enabled for http://localhost:3000","timestamp":"2025-07-01T21:01:58.702Z"}
+{"level":"info","message":"Socket.IO server ready for real-time connections","timestamp":"2025-07-01T21:01:58.703Z"}
+{"level":"info","message":"Performance monitoring active","timestamp":"2025-07-01T21:01:58.703Z"}
+{"level":"info","message":"Error tracking system initialized","timestamp":"2025-07-01T21:01:58.703Z"}
+{"level":"info","message":"Backup system ready","timestamp":"2025-07-01T21:01:58.704Z"}
+{"level":"info","message":"Lazy loading service initialized","timestamp":"2025-07-01T21:01:58.704Z"}
+{"level":"info","message":"🚀 Phase 7 optimization features fully activated!","timestamp":"2025-07-01T21:01:58.704Z"}
+{"level":"info","message":"System alert sent KPIs updated","timestamp":"2025-07-01T21:01:58.893Z","type":"info"}
+{"activeCustomers":0,"inventoryTurnover":0,"level":"info","message":"All KPIs updated successfully","orderCount":0,"timestamp":"2025-07-01T21:01:58.894Z","totalRevenue":0}
+{"count":5,"level":"info","message":"KPIs initialized","timestamp":"2025-07-01T21:01:58.894Z"}
+{"level":"info","message":"SMTP server is ready to send emails","timestamp":"2025-07-01T21:02:01.638Z"}
+{"level":"info","message":"Attempting login for email: sohandesignz@gmail.com","timestamp":"2025-07-01T21:02:21.196Z"}
+{"level":"info","message":"Attempting login for email: sohandesignz@gmail.com","timestamp":"2025-07-01T21:02:21.197Z"}
+{"level":"info","message":"User found, checking password...","timestamp":"2025-07-01T21:02:21.241Z"}
+{"level":"info","message":"Login successful for: sohandesignz@gmail.com","timestamp":"2025-07-01T21:02:21.487Z"}
+{"level":"warn","message":"High memory usage detected","timestamp":"2025-07-01T21:02:58.693Z","usage":93}
+{"level":"info","message":"System alert sent High memory usage: 93%","timestamp":"2025-07-01T21:02:58.695Z","type":"warning"}
+{"level":"info","message":"System alert sent System metrics updated","timestamp":"2025-07-01T21:02:58.696Z","type":"info"}
+{"level":"warn","message":"High memory usage detected","timestamp":"2025-07-01T21:03:58.706Z","usage":93}
+{"level":"info","message":"System alert sent High memory usage: 93%","timestamp":"2025-07-01T21:03:58.707Z","type":"warning"}
+{"level":"info","message":"System alert sent System metrics updated","timestamp":"2025-07-01T21:03:58.707Z","type":"info"}
+{"level":"info","message":"Successfully deleted user: sohandesignz@gmail.com","timestamp":"2025-07-01T21:04:27.356Z"}
+{"level":"info","message":"Verification email sent:","timestamp":"2025-07-01T21:04:47.276Z"}
+{"endpoint":"/api/auth/verify-email/9a90ee9fe6935ec209d999b680fc9bc9c32af80be75ff0e2f178b620885b66b9","errorId":"err_1751403895030_4ta0ecu7b","level":"error","message":"Error tracked Invalid or expired verification token","timestamp":"2025-07-01T21:04:55.040Z"}
+{"level":"error","message":"Error: Invalid or expired verification token","name":"AppError","stack":"AppError: Invalid or expired verification token\n    at AuthService.<anonymous> (C:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\src\\services\\auth.service.ts:98:15)\n    at Generator.next (<anonymous>)\n    at fulfilled (C:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\src\\services\\auth.service.ts:38:58)","status":"error","statusCode":400,"timestamp":"2025-07-01T21:04:55.042Z"}
+{"level":"warn","message":"High memory usage detected","timestamp":"2025-07-01T21:04:58.714Z","usage":89}
+{"level":"info","message":"System alert sent High memory usage: 89%","timestamp":"2025-07-01T21:04:58.716Z","type":"warning"}
+{"errorRate":33.33,"level":"warn","message":"High error rate detected","timestamp":"2025-07-01T21:04:58.717Z"}
+{"level":"info","message":"System alert sent High error rate: 33.33%","timestamp":"2025-07-01T21:04:58.719Z","type":"warning"}
+{"level":"info","message":"System alert sent System metrics updated","timestamp":"2025-07-01T21:04:58.720Z","type":"info"}
+{"level":"info","message":"Attempting login for email: sohandesignz@gmail.com","timestamp":"2025-07-01T21:05:08.813Z"}
+{"level":"info","message":"Attempting login for email: sohandesignz@gmail.com","timestamp":"2025-07-01T21:05:08.813Z"}
+{"level":"info","message":"User found, checking password...","timestamp":"2025-07-01T21:05:08.817Z"}
+{"level":"info","message":"Login successful for: sohandesignz@gmail.com","timestamp":"2025-07-01T21:05:09.063Z"}
+{"level":"warn","message":"High memory usage detected","timestamp":"2025-07-01T21:05:58.718Z","usage":93}
+{"level":"info","message":"System alert sent High memory usage: 93%","timestamp":"2025-07-01T21:05:58.720Z","type":"warning"}
+{"level":"info","message":"System alert sent System metrics updated","timestamp":"2025-07-01T21:05:58.722Z","type":"info"}
+{"level":"warn","message":"High memory usage detected","timestamp":"2025-07-01T21:06:58.727Z","usage":93}
+{"level":"info","message":"System alert sent High memory usage: 93%","timestamp":"2025-07-01T21:06:58.730Z","type":"warning"}
+{"level":"info","message":"System alert sent System metrics updated","timestamp":"2025-07-01T21:06:58.733Z","type":"info"}
+{"level":"warn","message":"High memory usage detected","timestamp":"2025-07-01T21:07:58.736Z","usage":93}
+{"level":"info","message":"System alert sent High memory usage: 93%","timestamp":"2025-07-01T21:07:58.739Z","type":"warning"}
+{"level":"info","message":"System alert sent System metrics updated","timestamp":"2025-07-01T21:07:58.740Z","type":"info"}
+{"level":"warn","message":"High memory usage detected","timestamp":"2025-07-01T21:08:58.740Z","usage":94}
+{"level":"info","message":"System alert sent High memory usage: 94%","timestamp":"2025-07-01T21:08:58.742Z","type":"warning"}
+{"level":"info","message":"System alert sent System metrics updated","timestamp":"2025-07-01T21:08:58.744Z","type":"info"}
+{"level":"info","message":"Cache cleanup timer started","timestamp":"2025-07-01T21:09:57.647Z"}
+{"count":4,"level":"info","message":"Default report templates initialized","timestamp":"2025-07-01T21:09:57.652Z"}
+{"level":"info","message":"Report schedule processor started","timestamp":"2025-07-01T21:09:57.653Z"}
+{"level":"info","message":"Analytics periodic updates started","timestamp":"2025-07-01T21:09:57.766Z"}
+{"level":"info","message":"Performance monitoring started","timestamp":"2025-07-01T21:09:57.836Z"}
+{"level":"info","message":"Socket.IO server initialized successfully","timestamp":"2025-07-01T21:09:57.875Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-07-01T21:09:57.887Z"}
+{"level":"info","message":"CORS enabled for http://localhost:3000","timestamp":"2025-07-01T21:09:57.887Z"}
+{"level":"info","message":"Socket.IO server ready for real-time connections","timestamp":"2025-07-01T21:09:57.887Z"}
+{"level":"info","message":"Performance monitoring active","timestamp":"2025-07-01T21:09:57.888Z"}
+{"level":"info","message":"Error tracking system initialized","timestamp":"2025-07-01T21:09:57.888Z"}
+{"level":"info","message":"Backup system ready","timestamp":"2025-07-01T21:09:57.888Z"}
+{"level":"info","message":"Lazy loading service initialized","timestamp":"2025-07-01T21:09:57.889Z"}
+{"level":"info","message":"🚀 Phase 7 optimization features fully activated!","timestamp":"2025-07-01T21:09:57.889Z"}
+{"level":"info","message":"System alert sent KPIs updated","timestamp":"2025-07-01T21:09:58.014Z","type":"info"}
+{"activeCustomers":0,"inventoryTurnover":0,"level":"info","message":"All KPIs updated successfully","orderCount":0,"timestamp":"2025-07-01T21:09:58.015Z","totalRevenue":0}
+{"count":5,"level":"info","message":"KPIs initialized","timestamp":"2025-07-01T21:09:58.016Z"}
+{"level":"info","message":"SMTP server is ready to send emails","timestamp":"2025-07-01T21:10:00.599Z"}
+{"level":"warn","message":"High memory usage detected","timestamp":"2025-07-01T21:10:57.842Z","usage":91}
+{"level":"info","message":"System alert sent High memory usage: 91%","timestamp":"2025-07-01T21:10:57.845Z","type":"warning"}
+{"level":"info","message":"System alert sent System metrics updated","timestamp":"2025-07-01T21:10:57.847Z","type":"info"}
+{"level":"warn","message":"High memory usage detected","timestamp":"2025-07-01T21:11:57.852Z","usage":92}
+{"level":"info","message":"System alert sent High memory usage: 92%","timestamp":"2025-07-01T21:11:57.857Z","type":"warning"}
+{"level":"info","message":"System alert sent System metrics updated","timestamp":"2025-07-01T21:11:57.859Z","type":"info"}
+{"level":"info","message":"Cache cleanup timer started","timestamp":"2025-07-01T21:11:59.523Z"}
+{"count":4,"level":"info","message":"Default report templates initialized","timestamp":"2025-07-01T21:11:59.528Z"}
+{"level":"info","message":"Report schedule processor started","timestamp":"2025-07-01T21:11:59.528Z"}
+{"level":"info","message":"Analytics periodic updates started","timestamp":"2025-07-01T21:11:59.533Z"}
+{"level":"info","message":"Performance monitoring started","timestamp":"2025-07-01T21:11:59.548Z"}
+{"level":"info","message":"Socket.IO server initialized successfully","timestamp":"2025-07-01T21:11:59.555Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-07-01T21:11:59.558Z"}
+{"level":"info","message":"CORS enabled for http://localhost:3000","timestamp":"2025-07-01T21:11:59.558Z"}
+{"level":"info","message":"Socket.IO server ready for real-time connections","timestamp":"2025-07-01T21:11:59.558Z"}
+{"level":"info","message":"Performance monitoring active","timestamp":"2025-07-01T21:11:59.559Z"}
+{"level":"info","message":"Error tracking system initialized","timestamp":"2025-07-01T21:11:59.559Z"}
+{"level":"info","message":"Backup system ready","timestamp":"2025-07-01T21:11:59.559Z"}
+{"level":"info","message":"Lazy loading service initialized","timestamp":"2025-07-01T21:11:59.560Z"}
+{"level":"info","message":"🚀 Phase 7 optimization features fully activated!","timestamp":"2025-07-01T21:11:59.560Z"}
+{"level":"info","message":"System alert sent KPIs updated","timestamp":"2025-07-01T21:11:59.627Z","type":"info"}
+{"activeCustomers":0,"inventoryTurnover":0,"level":"info","message":"All KPIs updated successfully","orderCount":0,"timestamp":"2025-07-01T21:11:59.627Z","totalRevenue":0}
+{"count":5,"level":"info","message":"KPIs initialized","timestamp":"2025-07-01T21:11:59.628Z"}
+{"level":"info","message":"SMTP server is ready to send emails","timestamp":"2025-07-01T21:12:02.312Z"}
+{"level":"info","message":"Cache cleanup timer started","timestamp":"2025-07-01T21:12:19.721Z"}
+{"count":4,"level":"info","message":"Default report templates initialized","timestamp":"2025-07-01T21:12:19.728Z"}
+{"level":"info","message":"Report schedule processor started","timestamp":"2025-07-01T21:12:19.729Z"}
+{"level":"info","message":"Analytics periodic updates started","timestamp":"2025-07-01T21:12:19.737Z"}
+{"level":"info","message":"Performance monitoring started","timestamp":"2025-07-01T21:12:19.763Z"}
+{"level":"info","message":"Socket.IO server initialized successfully","timestamp":"2025-07-01T21:12:19.776Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-07-01T21:12:19.780Z"}
+{"level":"info","message":"CORS enabled for http://localhost:3000","timestamp":"2025-07-01T21:12:19.781Z"}
+{"level":"info","message":"Socket.IO server ready for real-time connections","timestamp":"2025-07-01T21:12:19.781Z"}
+{"level":"info","message":"Performance monitoring active","timestamp":"2025-07-01T21:12:19.782Z"}
+{"level":"info","message":"Error tracking system initialized","timestamp":"2025-07-01T21:12:19.783Z"}
+{"level":"info","message":"Backup system ready","timestamp":"2025-07-01T21:12:19.783Z"}
+{"level":"info","message":"Lazy loading service initialized","timestamp":"2025-07-01T21:12:19.784Z"}
+{"level":"info","message":"🚀 Phase 7 optimization features fully activated!","timestamp":"2025-07-01T21:12:19.784Z"}
+{"level":"info","message":"Cache cleanup timer started","timestamp":"2025-07-01T21:12:20.623Z"}
+{"count":4,"level":"info","message":"Default report templates initialized","timestamp":"2025-07-01T21:12:20.630Z"}
+{"level":"info","message":"Report schedule processor started","timestamp":"2025-07-01T21:12:20.631Z"}
+{"level":"info","message":"Analytics periodic updates started","timestamp":"2025-07-01T21:12:20.637Z"}
+{"level":"info","message":"Performance monitoring started","timestamp":"2025-07-01T21:12:20.652Z"}
+{"level":"info","message":"Socket.IO server initialized successfully","timestamp":"2025-07-01T21:12:20.659Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-07-01T21:12:20.662Z"}
+{"level":"info","message":"CORS enabled for http://localhost:3000","timestamp":"2025-07-01T21:12:20.663Z"}
+{"level":"info","message":"Socket.IO server ready for real-time connections","timestamp":"2025-07-01T21:12:20.663Z"}
+{"level":"info","message":"Performance monitoring active","timestamp":"2025-07-01T21:12:20.664Z"}
+{"level":"info","message":"Error tracking system initialized","timestamp":"2025-07-01T21:12:20.664Z"}
+{"level":"info","message":"Backup system ready","timestamp":"2025-07-01T21:12:20.665Z"}
+{"level":"info","message":"Lazy loading service initialized","timestamp":"2025-07-01T21:12:20.665Z"}
+{"level":"info","message":"🚀 Phase 7 optimization features fully activated!","timestamp":"2025-07-01T21:12:20.665Z"}
+{"level":"info","message":"System alert sent KPIs updated","timestamp":"2025-07-01T21:12:20.731Z","type":"info"}
+{"activeCustomers":0,"inventoryTurnover":0,"level":"info","message":"All KPIs updated successfully","orderCount":0,"timestamp":"2025-07-01T21:12:20.731Z","totalRevenue":0}
+{"count":5,"level":"info","message":"KPIs initialized","timestamp":"2025-07-01T21:12:20.732Z"}
+{"level":"info","message":"SMTP server is ready to send emails","timestamp":"2025-07-01T21:12:24.732Z"}
+{"level":"info","message":"Cache cleanup timer started","timestamp":"2025-07-01T21:12:35.800Z"}
+{"count":4,"level":"info","message":"Default report templates initialized","timestamp":"2025-07-01T21:12:35.806Z"}
+{"level":"info","message":"Report schedule processor started","timestamp":"2025-07-01T21:12:35.807Z"}
+{"level":"info","message":"Analytics periodic updates started","timestamp":"2025-07-01T21:12:35.811Z"}
+{"level":"info","message":"Performance monitoring started","timestamp":"2025-07-01T21:12:35.826Z"}
+{"level":"info","message":"Socket.IO server initialized successfully","timestamp":"2025-07-01T21:12:35.834Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-07-01T21:12:35.838Z"}
+{"level":"info","message":"CORS enabled for http://localhost:3000","timestamp":"2025-07-01T21:12:35.838Z"}
+{"level":"info","message":"Socket.IO server ready for real-time connections","timestamp":"2025-07-01T21:12:35.838Z"}
+{"level":"info","message":"Performance monitoring active","timestamp":"2025-07-01T21:12:35.839Z"}
+{"level":"info","message":"Error tracking system initialized","timestamp":"2025-07-01T21:12:35.839Z"}
+{"level":"info","message":"Backup system ready","timestamp":"2025-07-01T21:12:35.839Z"}
+{"level":"info","message":"Lazy loading service initialized","timestamp":"2025-07-01T21:12:35.839Z"}
+{"level":"info","message":"🚀 Phase 7 optimization features fully activated!","timestamp":"2025-07-01T21:12:35.840Z"}
+{"level":"info","message":"System alert sent KPIs updated","timestamp":"2025-07-01T21:12:36.031Z","type":"info"}
+{"activeCustomers":0,"inventoryTurnover":0,"level":"info","message":"All KPIs updated successfully","orderCount":0,"timestamp":"2025-07-01T21:12:36.032Z","totalRevenue":0}
+{"count":5,"level":"info","message":"KPIs initialized","timestamp":"2025-07-01T21:12:36.033Z"}
+{"level":"info","message":"Cache cleanup timer started","timestamp":"2025-07-01T21:12:37.788Z"}
+{"count":4,"level":"info","message":"Default report templates initialized","timestamp":"2025-07-01T21:12:37.793Z"}
+{"level":"info","message":"Report schedule processor started","timestamp":"2025-07-01T21:12:37.794Z"}
+{"level":"info","message":"Analytics periodic updates started","timestamp":"2025-07-01T21:12:37.798Z"}
+{"level":"info","message":"Performance monitoring started","timestamp":"2025-07-01T21:12:37.812Z"}
+{"level":"info","message":"Socket.IO server initialized successfully","timestamp":"2025-07-01T21:12:37.818Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-07-01T21:12:37.821Z"}
+{"level":"info","message":"CORS enabled for http://localhost:3000","timestamp":"2025-07-01T21:12:37.822Z"}
+{"level":"info","message":"Socket.IO server ready for real-time connections","timestamp":"2025-07-01T21:12:37.822Z"}
+{"level":"info","message":"Performance monitoring active","timestamp":"2025-07-01T21:12:37.823Z"}
+{"level":"info","message":"Error tracking system initialized","timestamp":"2025-07-01T21:12:37.823Z"}
+{"level":"info","message":"Backup system ready","timestamp":"2025-07-01T21:12:37.823Z"}
+{"level":"info","message":"Lazy loading service initialized","timestamp":"2025-07-01T21:12:37.824Z"}
+{"level":"info","message":"🚀 Phase 7 optimization features fully activated!","timestamp":"2025-07-01T21:12:37.824Z"}
+{"level":"info","message":"System alert sent KPIs updated","timestamp":"2025-07-01T21:12:37.887Z","type":"info"}
+{"activeCustomers":0,"inventoryTurnover":0,"level":"info","message":"All KPIs updated successfully","orderCount":0,"timestamp":"2025-07-01T21:12:37.887Z","totalRevenue":0}
+{"count":5,"level":"info","message":"KPIs initialized","timestamp":"2025-07-01T21:12:37.888Z"}
+{"level":"info","message":"SMTP server is ready to send emails","timestamp":"2025-07-01T21:12:41.653Z"}
+{"level":"info","message":"Cache cleanup timer started","timestamp":"2025-07-01T21:13:32.370Z"}
+{"count":4,"level":"info","message":"Default report templates initialized","timestamp":"2025-07-01T21:13:32.374Z"}
+{"level":"info","message":"Report schedule processor started","timestamp":"2025-07-01T21:13:32.375Z"}
+{"level":"info","message":"Analytics periodic updates started","timestamp":"2025-07-01T21:13:32.465Z"}
+{"level":"info","message":"Performance monitoring started","timestamp":"2025-07-01T21:13:32.542Z"}
+{"level":"info","message":"Socket.IO server initialized successfully","timestamp":"2025-07-01T21:13:32.576Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-07-01T21:13:32.579Z"}
+{"level":"info","message":"CORS enabled for http://localhost:3000","timestamp":"2025-07-01T21:13:32.580Z"}
+{"level":"info","message":"Socket.IO server ready for real-time connections","timestamp":"2025-07-01T21:13:32.580Z"}
+{"level":"info","message":"Performance monitoring active","timestamp":"2025-07-01T21:13:32.581Z"}
+{"level":"info","message":"Error tracking system initialized","timestamp":"2025-07-01T21:13:32.581Z"}
+{"level":"info","message":"Backup system ready","timestamp":"2025-07-01T21:13:32.581Z"}
+{"level":"info","message":"Lazy loading service initialized","timestamp":"2025-07-01T21:13:32.582Z"}
+{"level":"info","message":"🚀 Phase 7 optimization features fully activated!","timestamp":"2025-07-01T21:13:32.582Z"}
+{"level":"info","message":"System alert sent KPIs updated","timestamp":"2025-07-01T21:13:32.830Z","type":"info"}
+{"activeCustomers":0,"inventoryTurnover":0,"level":"info","message":"All KPIs updated successfully","orderCount":0,"timestamp":"2025-07-01T21:13:32.831Z","totalRevenue":0}
+{"count":5,"level":"info","message":"KPIs initialized","timestamp":"2025-07-01T21:13:32.832Z"}
+{"level":"info","message":"SMTP server is ready to send emails","timestamp":"2025-07-01T21:13:36.080Z"}
+{"level":"info","message":"Successfully deleted user: sohandesignz@gmail.com","timestamp":"2025-07-01T21:14:03.123Z"}

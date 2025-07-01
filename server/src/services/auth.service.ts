@@ -84,8 +84,10 @@ class AuthService {
 
   async verifyEmail(token: string) {
     try {
-      // Find user with token
-      const user = await this.prisma.user.findFirst({
+      logger.info(`Starting email verification for token: ${token.substring(0, 10)}...`);
+      
+      // First, try to find user by token
+      let user = await this.prisma.user.findFirst({
         where: {
           verificationToken: token,
           verificationTokenExpires: {
@@ -95,10 +97,34 @@ class AuthService {
       });
 
       if (!user) {
-        throw new AppError(400, 'Invalid or expired verification token');
+        logger.info(`No user found with valid token`);
+        // If no user found with valid token, check if there's a user with this token but expired/used
+        const userWithToken = await this.prisma.user.findFirst({
+          where: {
+            verificationToken: token
+          }
+        });
+
+        if (userWithToken) {
+          logger.info(`User found with token, checking verification status: ${userWithToken.isEmailVerified}`);
+          if (userWithToken.isEmailVerified) {
+            // User is already verified
+            logger.info(`User is already verified: ${userWithToken.email}`);
+            return { message: 'Email is already verified' };
+          } else {
+            // Token exists but expired
+            logger.info(`Token expired for user: ${userWithToken.email}`);
+            throw new AppError(400, 'Verification link has expired. Please request a new verification email.');
+          }
+        }
+
+        // No user found with this token at all - could be already used and cleared
+        logger.info(`No user found with this token at all`);
+        throw new AppError(400, 'Invalid verification link. If you have already verified your email, you can proceed to login.');
       }
 
-      // Update user
+      logger.info(`User found with valid token, proceeding with verification: ${user.email}`);
+      // User found with valid token - proceed with verification
       await this.prisma.user.update({
         where: { id: user.id },
         data: {
@@ -108,6 +134,7 @@ class AuthService {
         }
       });
 
+      logger.info(`Email verification successful for: ${user.email}`);
       return { message: 'Email verified successfully' };
     } catch (error) {
       if (error instanceof AppError) {
@@ -115,6 +142,51 @@ class AuthService {
       }
       logger.error('Email verification error:', error);
       throw new AppError(500, 'Email verification failed. Please try again.');
+    }
+  }
+
+  async resendVerificationEmail(email: string) {
+    try {
+      // Find user by email
+      const user = await this.prisma.user.findUnique({
+        where: { email }
+      });
+
+      if (!user) {
+        throw new AppError(404, 'No user found with this email address');
+      }
+
+      if (user.isEmailVerified) {
+        logger.info(`Attempt to resend verification email for already verified user: ${email}`);
+        throw new AppError(400, 'Email is already verified. You can proceed to login.');
+      }
+
+      logger.info(`Resending verification email for: ${email}`);
+      
+      // Generate new verification token
+      const verificationToken = crypto.randomBytes(32).toString('hex');
+      const verificationTokenExpires = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
+
+      // Update user with new token
+      await this.prisma.user.update({
+        where: { id: user.id },
+        data: {
+          verificationToken,
+          verificationTokenExpires
+        }
+      });
+
+      // Send new verification email
+      await emailService.sendVerificationEmail(email, verificationToken);
+
+      logger.info(`Verification email resent successfully for: ${email}`);
+      return { message: 'Verification email sent successfully' };
+    } catch (error) {
+      if (error instanceof AppError) {
+        throw error;
+      }
+      logger.error('Resend verification email error:', error);
+      throw new AppError(500, 'Failed to resend verification email. Please try again.');
     }
   }
 
@@ -238,6 +310,20 @@ class AuthService {
 
       // Generate new tokens
       return this.generateTokens(user);
+    } catch (error) {
+      throw new AppError(401, 'Invalid refresh token');
+    }
+  }
+
+  async logout(refreshToken: string): Promise<void> {
+    try {
+      // In a simple implementation, we just verify the token exists
+      // In a production app, you'd typically store refresh tokens in DB and invalidate them
+      const { verifyRefreshToken } = await import('../utils/jwt');
+      verifyRefreshToken(refreshToken);
+      
+      // For now, just log the logout
+      logger.info('User logged out successfully');
     } catch (error) {
       throw new AppError(401, 'Invalid refresh token');
     }

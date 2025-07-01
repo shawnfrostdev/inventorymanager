@@ -14,6 +14,8 @@ async function checkUser(email: string) {
         name: true,
         role: true,
         isEmailVerified: true,
+        verificationToken: true,
+        verificationTokenExpires: true,
         createdAt: true
       }
     });
@@ -29,6 +31,8 @@ async function checkUser(email: string) {
     console.log('Name:', user.name);
     console.log('Role:', user.role);
     console.log('Email Verified:', user.isEmailVerified);
+    console.log('Verification Token:', user.verificationToken || 'null');
+    console.log('Token Expires:', user.verificationTokenExpires || 'null');
     console.log('Created At:', user.createdAt);
     console.log('Password Hash Length:', user.password.length);
   } catch (error) {

@@ -65,6 +65,25 @@ export class AuthController {
     }
   }
 
+  async resendVerificationEmail(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { email } = req.body;
+      
+      if (!email) {
+        throw new AppError(400, 'Email is required');
+      }
+      
+      const result = await authService.resendVerificationEmail(email);
+      
+      res.status(200).json({
+        status: 'success',
+        data: result
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
   async requestPasswordReset(req: Request, res: Response, next: NextFunction) {
     try {
       const { email } = req.body;
