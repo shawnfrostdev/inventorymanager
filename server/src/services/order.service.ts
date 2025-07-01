@@ -10,6 +10,7 @@ import {
   OrderStatus,
   PaymentStatus,
 } from '../types/order.types';
+import { socketService } from './socket.service';
 
 const prisma = new PrismaClient();
 
@@ -312,8 +313,24 @@ export class OrderService {
         return newOrder;
       });
 
-      // Return order with full details
-      return this.getOrderById(order.id);
+      // Get full order details for response and notification
+      const fullOrder = await this.getOrderById(order.id);
+
+      // Emit real-time order notification
+      socketService.emitOrderNotification({
+        orderId: order.id,
+        orderNumber: order.orderNumber,
+        customerId: customer.id,
+        customerName: customer.name,
+        status: order.status,
+        total: order.total,
+        currency: 'USD', // You can make this configurable
+        action: 'created',
+        updatedBy: userId,
+        timestamp: new Date(),
+      });
+
+      return fullOrder;
     } catch (error) {
       if (error instanceof AppError) throw error;
       throw new AppError(500, 'Failed to create order');
@@ -481,7 +498,24 @@ export class OrderService {
         },
       });
 
-      return this.getOrderById(order.id);
+      // Get updated order with full details
+      const updatedOrder = await this.getOrderById(order.id);
+
+      // Emit real-time order update notification
+      socketService.emitOrderNotification({
+        orderId: order.id,
+        orderNumber: order.orderNumber,
+        customerId: updatedOrder.customer.id,
+        customerName: updatedOrder.customer.name,
+        status: order.status,
+        total: order.total,
+        currency: 'USD',
+        action: 'updated',
+        updatedBy: data.userId || 'system', // You might need to pass userId to this method
+        timestamp: new Date(),
+      });
+
+      return updatedOrder;
     } catch (error) {
       if (error instanceof AppError) throw error;
       throw new AppError(500, 'Failed to update order');

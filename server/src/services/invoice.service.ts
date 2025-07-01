@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { logger } from '../utils/logger';
+import { socketService } from './socket.service';
 
 const prisma = new PrismaClient();
 
@@ -120,6 +121,27 @@ export const invoiceService = {
 
         return { invoice, invoiceItems };
       });
+
+      // Get customer data for notification
+      const customer = await prisma.customer.findUnique({
+        where: { id: data.customerId },
+      });
+
+      // Emit real-time invoice notification
+      if (customer) {
+        socketService.emitInvoiceNotification({
+          invoiceId: result.invoice.id,
+          invoiceNumber: result.invoice.invoiceNumber,
+          customerId: customer.id,
+          customerName: customer.name,
+          status: result.invoice.status,
+          total: result.invoice.total,
+          currency: result.invoice.currency,
+          action: 'created',
+          updatedBy: userId,
+          timestamp: new Date(),
+        });
+      }
 
       logger.info('Invoice created successfully', { invoiceId: result.invoice.id });
       return result;
@@ -348,6 +370,46 @@ export const invoiceService = {
 
         return { payment, invoice: updatedInvoice };
       });
+
+      // Get invoice and customer data for notification
+      const invoiceWithCustomer = await prisma.invoice.findUnique({
+        where: { id: data.invoiceId },
+        include: {
+          customer: true,
+        },
+      });
+
+      // Emit real-time payment notification
+      if (invoiceWithCustomer) {
+        socketService.emitPaymentNotification({
+          paymentId: result.payment.id,
+          paymentNumber: result.payment.paymentNumber,
+          invoiceId: invoiceWithCustomer.id,
+          invoiceNumber: invoiceWithCustomer.invoiceNumber,
+          amount: result.payment.amount,
+          currency: result.payment.currency,
+          method: result.payment.method,
+          customerId: invoiceWithCustomer.customer.id,
+          customerName: invoiceWithCustomer.customer.name,
+          timestamp: new Date(),
+        });
+
+        // If invoice is fully paid, emit invoice status update
+        if (result.invoice.balanceAmount === 0) {
+          socketService.emitInvoiceNotification({
+            invoiceId: invoiceWithCustomer.id,
+            invoiceNumber: invoiceWithCustomer.invoiceNumber,
+            customerId: invoiceWithCustomer.customer.id,
+            customerName: invoiceWithCustomer.customer.name,
+            status: 'PAID',
+            total: invoiceWithCustomer.total,
+            currency: invoiceWithCustomer.currency,
+            action: 'paid',
+            updatedBy: userId,
+            timestamp: new Date(),
+          });
+        }
+      }
 
       logger.info('Payment created successfully', { paymentId: result.payment.id });
       return result;

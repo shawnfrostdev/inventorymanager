@@ -1,6 +1,7 @@
 import { PrismaClient, Product, Category, StockMovement } from '@prisma/client';
 import { CreateProductDto, UpdateProductDto, CreateCategoryDto, UpdateCategoryDto, CreateStockMovementDto } from '../types/product.types';
 import { AppError } from '../utils/error';
+import { socketService } from './socket.service';
 
 const prisma = new PrismaClient();
 
@@ -154,6 +155,7 @@ export class ProductService {
         throw new AppError('Product not found', 404);
       }
 
+      const oldQuantity = product.quantity;
       let newQuantity = product.quantity;
       if (data.type === 'IN') {
         newQuantity += data.quantity;
@@ -171,12 +173,34 @@ export class ProductService {
         data: { quantity: newQuantity },
       });
 
-      return tx.stockMovement.create({
+      const stockMovement = await tx.stockMovement.create({
         data: {
           ...data,
           userId,
         },
       });
+
+      // Emit real-time stock update notification
+      socketService.emitStockUpdate({
+        productId: product.id,
+        productName: product.name,
+        oldQuantity,
+        newQuantity,
+        updatedBy: userId,
+        timestamp: new Date(),
+      });
+
+      // Check for low stock and emit alert if needed
+      if (newQuantity <= (product.minStock || 0) && newQuantity > 0) {
+        socketService.emitLowStockAlert({
+          productId: product.id,
+          productName: product.name,
+          currentStock: newQuantity,
+          minStock: product.minStock || 0,
+        });
+      }
+
+      return stockMovement;
     });
   }
 
