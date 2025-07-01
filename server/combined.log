@@ -1,0 +1,111 @@
+{"level":"info","message":"Server running on port 5000"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-07-01T12:52:55.945Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-07-01T13:02:26.849Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-07-01T13:02:43.838Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-07-01T13:02:57.285Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-07-01T13:25:57.539Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-07-01T13:26:20.930Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-07-01T13:26:39.714Z"}
+{"level":"error","message":"Error sending email: Error: Missing credentials for \"PLAIN\"","timestamp":"2025-07-01T13:52:12.554Z"}
+{"level":"error","message":"500 - Missing credentials for \"PLAIN\"","timestamp":"2025-07-01T13:52:12.560Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-07-01T13:53:13.435Z"}
+{"level":"error","message":"500 - User already exists with this email","timestamp":"2025-07-01T13:53:23.738Z"}
+{"level":"error","message":"500 - User already exists with this email","timestamp":"2025-07-01T13:53:36.177Z"}
+{"level":"error","message":"500 - User already exists with this email","timestamp":"2025-07-01T13:53:40.615Z"}
+{"level":"error","message":"500 - User already exists with this email","timestamp":"2025-07-01T14:00:33.171Z"}
+{"level":"error","message":"500 - User already exists with this email","timestamp":"2025-07-01T14:01:17.161Z"}
+{"level":"error","message":"500 - User already exists with this email","timestamp":"2025-07-01T14:02:03.596Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-07-01T14:02:34.230Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-07-01T14:02:36.576Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-07-01T14:03:16.078Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-07-01T14:04:15.275Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-07-01T14:04:16.758Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-07-01T14:04:29.425Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-07-01T14:04:32.446Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-07-01T14:07:42.354Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-07-01T14:09:53.677Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-07-01T14:21:41.201Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-07-01T14:22:07.613Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-07-01T14:22:09.185Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-07-01T14:22:31.311Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-07-01T14:22:31.792Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-07-01T14:23:26.072Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-07-01T14:23:40.550Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-07-01T14:23:41.930Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-07-01T14:23:56.045Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-07-01T14:23:58.371Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-07-01T14:23:58.860Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-07-01T14:25:24.671Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-07-01T14:25:26.559Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-07-01T14:25:27.969Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-07-01T14:25:42.538Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-07-01T14:25:44.062Z"}
+{"level":"error","message":"Error: Invalid email or password","timestamp":"2025-07-01T14:26:37.766Z"}
+{"level":"error","message":"AppError: Invalid email or password\n    at AuthService.<anonymous> (C:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\src\\services\\auth.service.ts:175:15)\n    at Generator.next (<anonymous>)\n    at fulfilled (C:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\src\\services\\auth.service.ts:5:58)","timestamp":"2025-07-01T14:26:37.776Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-07-01T14:27:12.670Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-07-01T14:27:14.681Z"}
+{"level":"info","message":"Email sent successfully to sohandesignz@gmail.com","timestamp":"2025-07-01T14:30:08.808Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-07-01T14:31:13.086Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-07-01T14:31:14.039Z"}
+{"level":"info","message":"Attempting login for email: sohandesignz@gmail.com","timestamp":"2025-07-01T14:33:14.649Z"}
+{"level":"info","message":"User found, checking password...","timestamp":"2025-07-01T14:33:14.695Z"}
+{"level":"info","message":"Email not verified for: sohandesignz@gmail.com","timestamp":"2025-07-01T14:33:14.941Z"}
+{"level":"error","message":"Error: Please verify your email before logging in","timestamp":"2025-07-01T14:33:14.942Z"}
+{"level":"error","message":"AppError: Please verify your email before logging in\n    at AuthService.<anonymous> (C:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\src\\services\\auth.service.ts:194:15)\n    at Generator.next (<anonymous>)\n    at fulfilled (C:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\src\\services\\auth.service.ts:5:58)","timestamp":"2025-07-01T14:33:14.950Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-07-01T14:34:11.816Z"}
+{"level":"info","message":"SMTP server is ready to send emails","timestamp":"2025-07-01T14:34:14.363Z"}
+{"address":"127.0.0.1","code":"ESOCKET","command":"CONN","errno":-4078,"level":"error","message":"SMTP connection error: connect ECONNREFUSED 127.0.0.1:587","port":587,"stack":"Error: connect ECONNREFUSED 127.0.0.1:587\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1607:16)","syscall":"connect","timestamp":"2025-07-01T14:34:33.230Z"}
+{"address":"127.0.0.1","code":"ESOCKET","command":"CONN","errno":-4078,"level":"error","message":"Error sending verification email: connect ECONNREFUSED 127.0.0.1:587","port":587,"stack":"Error: connect ECONNREFUSED 127.0.0.1:587\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1607:16)","syscall":"connect","timestamp":"2025-07-01T14:34:33.235Z"}
+{"address":"127.0.0.1","code":"ESOCKET","command":"CONN","errno":-4078,"level":"error","message":"Failed to send test email: connect ECONNREFUSED 127.0.0.1:587","port":587,"stack":"Error: connect ECONNREFUSED 127.0.0.1:587\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1607:16)","syscall":"connect","timestamp":"2025-07-01T14:34:33.235Z"}
+{"address":"127.0.0.1","code":"ESOCKET","command":"CONN","errno":-4078,"level":"error","message":"SMTP connection error: connect ECONNREFUSED 127.0.0.1:587","port":587,"stack":"Error: connect ECONNREFUSED 127.0.0.1:587\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1607:16)","syscall":"connect","timestamp":"2025-07-01T14:35:08.078Z"}
+{"address":"127.0.0.1","code":"ESOCKET","command":"CONN","errno":-4078,"level":"error","message":"Error sending verification email: connect ECONNREFUSED 127.0.0.1:587","port":587,"stack":"Error: connect ECONNREFUSED 127.0.0.1:587\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1607:16)","syscall":"connect","timestamp":"2025-07-01T14:35:08.084Z"}
+{"address":"127.0.0.1","code":"ESOCKET","command":"CONN","errno":-4078,"level":"error","message":"Failed to send test email: connect ECONNREFUSED 127.0.0.1:587","port":587,"stack":"Error: connect ECONNREFUSED 127.0.0.1:587\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1607:16)","syscall":"connect","timestamp":"2025-07-01T14:35:08.084Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-07-01T14:35:25.084Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-07-01T14:35:27.136Z"}
+{"level":"info","message":"SMTP server is ready to send emails","timestamp":"2025-07-01T14:35:29.416Z"}
+{"level":"info","message":"Attempting login for email: sohandesignz@gmail.com","timestamp":"2025-07-01T14:37:36.491Z"}
+{"level":"info","message":"No user found with email: sohandesignz@gmail.com","timestamp":"2025-07-01T14:37:36.709Z"}
+{"level":"error","message":"Error: Invalid email or password","timestamp":"2025-07-01T14:37:36.711Z"}
+{"level":"error","message":"AppError: Invalid email or password\n    at AuthService.<anonymous> (C:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\src\\services\\auth.service.ts:190:15)\n    at Generator.next (<anonymous>)\n    at fulfilled (C:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\src\\services\\auth.service.ts:5:58)","timestamp":"2025-07-01T14:37:36.721Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-07-01T14:38:41.328Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-07-01T14:38:42.550Z"}
+{"level":"info","message":"SMTP server is ready to send emails","timestamp":"2025-07-01T14:38:45.520Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-07-01T14:38:53.943Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-07-01T14:38:55.128Z"}
+{"level":"info","message":"SMTP server is ready to send emails","timestamp":"2025-07-01T14:38:57.603Z"}
+{"clientVersion":"6.11.0","code":"P2021","level":"error","message":"Error clearing users: \nInvalid `prisma.user.deleteMany()` invocation in\nC:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\src\\scripts\\clearUsers.ts:9:44\n\n  6 async function clearUsers() {\n  7   try {\n  8     // Delete all users\n→ 9     const deletedCount = await prisma.user.deleteMany(\nThe table `public.users` does not exist in the current database.","meta":{"modelName":"User","table":"public.users"},"name":"PrismaClientKnownRequestError","stack":"PrismaClientKnownRequestError: \nInvalid `prisma.user.deleteMany()` invocation in\nC:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\src\\scripts\\clearUsers.ts:9:44\n\n  6 async function clearUsers() {\n  7   try {\n  8     // Delete all users\n→ 9     const deletedCount = await prisma.user.deleteMany(\nThe table `public.users` does not exist in the current database.\n    at Xn.handleRequestError (C:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\node_modules\\@prisma\\client\\runtime\\library.js:121:7459)\n    at Xn.handleAndLogRequestError (C:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\node_modules\\@prisma\\client\\runtime\\library.js:121:6784)\n    at Xn.request (C:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\node_modules\\@prisma\\client\\runtime\\library.js:121:6491)\n    at async l (C:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\node_modules\\@prisma\\client\\runtime\\library.js:130:9812)","timestamp":"2025-07-01T14:39:50.989Z"}
+{"clientVersion":"6.11.0","code":"P2021","level":"error","message":"Error clearing users: \nInvalid `prisma.user.deleteMany()` invocation in\nC:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\src\\scripts\\clearUsers.ts:9:44\n\n  6 async function clearUsers() {\n  7   try {\n  8     // Delete all users\n→ 9     const deletedCount = await prisma.user.deleteMany(\nThe table `public.users` does not exist in the current database.","meta":{"modelName":"User","table":"public.users"},"name":"PrismaClientKnownRequestError","stack":"PrismaClientKnownRequestError: \nInvalid `prisma.user.deleteMany()` invocation in\nC:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\src\\scripts\\clearUsers.ts:9:44\n\n  6 async function clearUsers() {\n  7   try {\n  8     // Delete all users\n→ 9     const deletedCount = await prisma.user.deleteMany(\nThe table `public.users` does not exist in the current database.\n    at Xn.handleRequestError (C:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\node_modules\\@prisma\\client\\runtime\\library.js:121:7459)\n    at Xn.handleAndLogRequestError (C:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\node_modules\\@prisma\\client\\runtime\\library.js:121:6784)\n    at Xn.request (C:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\node_modules\\@prisma\\client\\runtime\\library.js:121:6491)\n    at async l (C:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\node_modules\\@prisma\\client\\runtime\\library.js:130:9812)","timestamp":"2025-07-01T14:41:00.326Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-07-01T15:00:07.749Z"}
+{"level":"info","message":"CORS enabled for http://localhost:3000","timestamp":"2025-07-01T15:00:07.751Z"}
+{"level":"info","message":"SMTP server is ready to send emails","timestamp":"2025-07-01T15:00:09.965Z"}
+{"clientVersion":"6.11.0","code":"P2021","level":"error","message":"Registration error: \nInvalid `this.prisma.user.findUnique()` invocation in\nC:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\src\\services\\auth.service.ts:37:51\n\n  34 async register(name: string, email: string, password: string) {\n  35   try {\n  36     // Check if user already exists\n→ 37     const existingUser = await this.prisma.user.findUnique(\nThe table `public.users` does not exist in the current database.","meta":{"modelName":"User","table":"public.users"},"name":"PrismaClientKnownRequestError","stack":"PrismaClientKnownRequestError: \nInvalid `this.prisma.user.findUnique()` invocation in\nC:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\src\\services\\auth.service.ts:37:51\n\n  34 async register(name: string, email: string, password: string) {\n  35   try {\n  36     // Check if user already exists\n→ 37     const existingUser = await this.prisma.user.findUnique(\nThe table `public.users` does not exist in the current database.\n    at Xn.handleRequestError (C:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\node_modules\\@prisma\\client\\runtime\\library.js:121:7459)\n    at Xn.handleAndLogRequestError (C:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\node_modules\\@prisma\\client\\runtime\\library.js:121:6784)\n    at Xn.request (C:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\node_modules\\@prisma\\client\\runtime\\library.js:121:6491)\n    at l (C:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\node_modules\\@prisma\\client\\runtime\\library.js:130:9812)","timestamp":"2025-07-01T15:02:46.952Z"}
+{"level":"error","message":"Error: Registration failed. Please try again.","name":"AppError","stack":"AppError: Registration failed. Please try again.\n    at AuthService.<anonymous> (C:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\src\\services\\auth.service.ts:81:13)\n    at Generator.throw (<anonymous>)\n    at rejected (C:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\src\\services\\auth.service.ts:6:65)","status":"error","statusCode":500,"timestamp":"2025-07-01T15:02:46.954Z"}
+{"clientVersion":"6.11.0","code":"P2021","level":"error","message":"Registration error: \nInvalid `this.prisma.user.findUnique()` invocation in\nC:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\src\\services\\auth.service.ts:37:51\n\n  34 async register(name: string, email: string, password: string) {\n  35   try {\n  36     // Check if user already exists\n→ 37     const existingUser = await this.prisma.user.findUnique(\nThe table `public.users` does not exist in the current database.","meta":{"modelName":"User","table":"public.users"},"name":"PrismaClientKnownRequestError","stack":"PrismaClientKnownRequestError: \nInvalid `this.prisma.user.findUnique()` invocation in\nC:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\src\\services\\auth.service.ts:37:51\n\n  34 async register(name: string, email: string, password: string) {\n  35   try {\n  36     // Check if user already exists\n→ 37     const existingUser = await this.prisma.user.findUnique(\nThe table `public.users` does not exist in the current database.\n    at Xn.handleRequestError (C:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\node_modules\\@prisma\\client\\runtime\\library.js:121:7459)\n    at Xn.handleAndLogRequestError (C:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\node_modules\\@prisma\\client\\runtime\\library.js:121:6784)\n    at Xn.request (C:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\node_modules\\@prisma\\client\\runtime\\library.js:121:6491)\n    at l (C:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\node_modules\\@prisma\\client\\runtime\\library.js:130:9812)","timestamp":"2025-07-01T15:04:29.530Z"}
+{"level":"error","message":"Error: Registration failed. Please try again.","name":"AppError","stack":"AppError: Registration failed. Please try again.\n    at AuthService.<anonymous> (C:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\src\\services\\auth.service.ts:81:13)\n    at Generator.throw (<anonymous>)\n    at rejected (C:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\src\\services\\auth.service.ts:6:65)","status":"error","statusCode":500,"timestamp":"2025-07-01T15:04:29.532Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-07-01T15:07:16.908Z"}
+{"level":"info","message":"CORS enabled for http://localhost:3000","timestamp":"2025-07-01T15:07:16.911Z"}
+{"level":"info","message":"SMTP server is ready to send emails","timestamp":"2025-07-01T15:07:19.206Z"}
+{"level":"info","message":"Verification email sent:","timestamp":"2025-07-01T15:07:52.124Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-07-01T15:10:03.501Z"}
+{"level":"info","message":"CORS enabled for http://localhost:3000","timestamp":"2025-07-01T15:10:03.503Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-07-01T15:10:04.832Z"}
+{"level":"info","message":"CORS enabled for http://localhost:3000","timestamp":"2025-07-01T15:10:04.835Z"}
+{"level":"info","message":"SMTP server is ready to send emails","timestamp":"2025-07-01T15:10:07.073Z"}
+{"level":"error","message":"Error: Cannot destructure property 'token' of 'req.body' as it is undefined.","stack":"TypeError: Cannot destructure property 'token' of 'req.body' as it is undefined.\n    at AuthController.<anonymous> (C:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\src\\controllers\\auth.controller.ts:51:15)\n    at Generator.next (<anonymous>)\n    at C:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\src\\controllers\\auth.controller.ts:8:71\n    at new Promise (<anonymous>)\n    at __awaiter (C:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\src\\controllers\\auth.controller.ts:4:12)\n    at AuthController.verifyEmail (C:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\src\\controllers\\auth.controller.ts:55:16)\n    at Layer.handleRequest (C:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\node_modules\\router\\lib\\layer.js:152:17)\n    at next (C:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\node_modules\\router\\lib\\route.js:157:13)\n    at Route.dispatch (C:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\node_modules\\router\\lib\\route.js:117:3)\n    at handle (C:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\node_modules\\router\\index.js:435:11)","timestamp":"2025-07-01T15:11:33.525Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-07-01T15:11:49.891Z"}
+{"level":"info","message":"CORS enabled for http://localhost:3000","timestamp":"2025-07-01T15:11:49.894Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-07-01T15:11:51.368Z"}
+{"level":"info","message":"CORS enabled for http://localhost:3000","timestamp":"2025-07-01T15:11:51.370Z"}
+{"level":"info","message":"SMTP server is ready to send emails","timestamp":"2025-07-01T15:11:53.538Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-07-01T15:12:01.911Z"}
+{"level":"info","message":"CORS enabled for http://localhost:3000","timestamp":"2025-07-01T15:12:01.914Z"}
+{"level":"info","message":"SMTP server is ready to send emails","timestamp":"2025-07-01T15:12:04.041Z"}
+{"level":"error","message":"Error: Invalid or expired verification token","name":"AppError","stack":"AppError: Invalid or expired verification token\n    at AuthService.<anonymous> (C:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\src\\services\\auth.service.ts:98:15)\n    at Generator.next (<anonymous>)\n    at fulfilled (C:\\Users\\sanka\\Desktop\\sohan\\inventorymanager\\server\\src\\services\\auth.service.ts:5:58)","status":"error","statusCode":400,"timestamp":"2025-07-01T15:12:15.500Z"}
+{"level":"info","message":"Attempting login for email: sohandesignz@gmail.com","timestamp":"2025-07-01T15:12:28.297Z"}
+{"level":"info","message":"Attempting login for email: sohandesignz@gmail.com","timestamp":"2025-07-01T15:12:28.298Z"}
+{"level":"info","message":"User found, checking password...","timestamp":"2025-07-01T15:12:28.301Z"}
+{"level":"info","message":"Login successful for: sohandesignz@gmail.com","timestamp":"2025-07-01T15:12:28.552Z"}
+{"level":"info","message":"Attempting login for email: sohandesignz@gmail.com","timestamp":"2025-07-01T15:12:38.483Z"}
+{"level":"info","message":"Attempting login for email: sohandesignz@gmail.com","timestamp":"2025-07-01T15:12:38.484Z"}
+{"level":"info","message":"User found, checking password...","timestamp":"2025-07-01T15:12:38.488Z"}
+{"level":"info","message":"Login successful for: sohandesignz@gmail.com","timestamp":"2025-07-01T15:12:38.726Z"}

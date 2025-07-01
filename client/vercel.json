@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "regions": ["iad1"],
+  "git": {
+    "deploymentEnabled": {
+      "main": true,
+      "development": true,
+      "production": false
+    }
+  },
+  "env": {
+    "API_URL": "production-api-url-here"
+  }
+} 
