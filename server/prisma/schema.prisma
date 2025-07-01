@@ -23,8 +23,63 @@ model User {
   lastLogin               DateTime?
   createdAt               DateTime  @default(now())
   updatedAt               DateTime  @updatedAt
+  products                Product[]
+  stockMovements          StockMovement[]
 
   @@map("users")
+}
+
+model Product {
+  id          String    @id @default(uuid())
+  name        String
+  description String?
+  sku         String    @unique
+  barcode     String?   @unique
+  price       Float
+  cost        Float
+  quantity    Int       @default(0)
+  minQuantity Int       @default(0)
+  imageUrl    String?
+  category    Category  @relation(fields: [categoryId], references: [id])
+  categoryId  String
+  createdBy   User      @relation(fields: [userId], references: [id])
+  userId      String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  stockMovements StockMovement[]
+
+  @@map("products")
+}
+
+model Category {
+  id          String    @id @default(uuid())
+  name        String    @unique
+  description String?
+  products    Product[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@map("categories")
+}
+
+model StockMovement {
+  id          String    @id @default(uuid())
+  type        MovementType
+  quantity    Int
+  reason      String?
+  product     Product   @relation(fields: [productId], references: [id])
+  productId   String
+  createdBy   User      @relation(fields: [userId], references: [id])
+  userId      String
+  createdAt   DateTime  @default(now())
+
+  @@map("stock_movements")
+}
+
+enum MovementType {
+  IN
+  OUT
+  ADJUSTMENT
 }
 
 enum Role {

@@ -23,7 +23,7 @@ export default function VerifyEmail() {
       }
 
       try {
-        const response = await fetch(`/api/auth/verify-email/${token}`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/auth/verify-email/${token}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
