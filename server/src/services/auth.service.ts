@@ -121,7 +121,7 @@ class AuthService {
   async requestPasswordReset(email: string): Promise<void> {
     const user = await prisma.user.findUnique({ where: { email } });
     if (!user) {
-      throw new AppError('No user found with this email', 404);
+      throw new AppError(404, 'No user found with this email');
     }
 
     const resetToken = crypto.randomBytes(32).toString('hex');
@@ -135,11 +135,7 @@ class AuthService {
       }
     });
 
-    await emailService.sendEmail({
-      to: email,
-      subject: 'Password Reset Request',
-      html: emailService.getPasswordResetEmailTemplate(user.name || 'User', resetToken)
-    });
+    await emailService.sendPasswordResetEmail(email, resetToken);
   }
 
   async resetPassword(token: string, newPassword: string): Promise<void> {
@@ -153,7 +149,7 @@ class AuthService {
     });
 
     if (!user) {
-      throw new AppError('Invalid or expired reset token', 400);
+      throw new AppError(400, 'Invalid or expired reset token');
     }
 
     const hashedPassword = await bcrypt.hash(newPassword, 12);
@@ -231,18 +227,19 @@ class AuthService {
   async refreshToken(refreshToken: string): Promise<AuthTokens> {
     try {
       // Verify refresh token
-      const decoded = jwt.verify(refreshToken, this.JWT_REFRESH_SECRET) as JWTPayload;
+      const { verifyRefreshToken } = await import('../utils/jwt');
+      const decoded = verifyRefreshToken(refreshToken);
       
       // Get user
       const user = await prisma.user.findUnique({ where: { id: decoded.userId } });
       if (!user) {
-        throw new AppError('User not found', 404);
+        throw new AppError(404, 'User not found');
       }
 
       // Generate new tokens
       return this.generateTokens(user);
     } catch (error) {
-      throw new AppError('Invalid refresh token', 401);
+      throw new AppError(401, 'Invalid refresh token');
     }
   }
 
@@ -286,34 +283,20 @@ class AuthService {
       // Generate tokens
       return this.generateTokens(user);
     } catch (error) {
-      throw new AppError('Failed to authenticate with Google', 401);
+      throw new AppError(401, 'Failed to authenticate with Google');
     }
   }
 
   private generateTokens(user: User): AuthTokens {
-    const payload: JWTPayload = {
-      userId: user.id,
-      email: user.email,
-      role: user.role
-    };
-
-    const accessToken = jwt.sign(payload, this.JWT_SECRET, {
-      expiresIn: this.JWT_EXPIRES_IN
-    });
-
-    const refreshToken = jwt.sign(payload, this.JWT_REFRESH_SECRET, {
-      expiresIn: this.JWT_REFRESH_EXPIRES_IN
-    });
-
-    return { accessToken, refreshToken };
+    return generateTokens(user);
   }
 
   async validateToken(token: string): Promise<JWTPayload> {
     try {
-      const decoded = jwt.verify(token, this.JWT_SECRET) as JWTPayload;
-      return decoded;
+      const { verifyToken } = await import('../utils/jwt');
+      return verifyToken(token);
     } catch (error) {
-      throw new AppError('Invalid token', 401);
+      throw new AppError(401, 'Invalid token');
     }
   }
 }

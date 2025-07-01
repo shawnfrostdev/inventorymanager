@@ -7,7 +7,42 @@ import { protect as authMiddleware } from '../middleware/authMiddleware';
 
 const router = Router();
 
-// Product routes
+// Category routes (MUST come before /:id routes to avoid conflicts)
+router.post('/categories', 
+  authMiddleware,
+  validateRequest(createCategorySchema),
+  productController.createCategory
+);
+
+router.get('/categories', 
+  authMiddleware,
+  productController.getCategories
+);
+
+router.put('/categories/:id', 
+  authMiddleware,
+  validateRequest(updateCategorySchema),
+  productController.updateCategory
+);
+
+router.delete('/categories/:id', 
+  authMiddleware,
+  productController.deleteCategory
+);
+
+// Stock Movement routes (MUST come before /:id routes to avoid conflicts)
+router.post('/stock-movements', 
+  authMiddleware,
+  validateRequest(createStockMovementSchema),
+  productController.createStockMovement
+);
+
+router.get('/stock-movements/:productId', 
+  authMiddleware,
+  productController.getStockMovements
+);
+
+// Product routes (parameterized routes MUST come last)
 router.post('/', 
   authMiddleware,
   upload.single('image'),
@@ -35,41 +70,6 @@ router.put('/:id',
 router.delete('/:id', 
   authMiddleware,
   productController.deleteProduct
-);
-
-// Category routes
-router.post('/categories', 
-  authMiddleware,
-  validateRequest(createCategorySchema),
-  productController.createCategory
-);
-
-router.get('/categories', 
-  authMiddleware,
-  productController.getCategories
-);
-
-router.put('/categories/:id', 
-  authMiddleware,
-  validateRequest(updateCategorySchema),
-  productController.updateCategory
-);
-
-router.delete('/categories/:id', 
-  authMiddleware,
-  productController.deleteCategory
-);
-
-// Stock Movement routes
-router.post('/stock-movements', 
-  authMiddleware,
-  validateRequest(createStockMovementSchema),
-  productController.createStockMovement
-);
-
-router.get('/stock-movements/:productId', 
-  authMiddleware,
-  productController.getStockMovements
 );
 
 export default router; 

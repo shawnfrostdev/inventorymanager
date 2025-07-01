@@ -27,7 +27,7 @@ export class ProductService {
     });
   }
 
-  async getProducts(query: { search?: string; categoryId?: string } = {}): Promise<Product[]> {
+  async getProducts(query: { search?: string; categoryId?: string; userId?: string } = {}): Promise<Product[]> {
     const where: any = {};
     
     if (query.search) {
@@ -50,7 +50,7 @@ export class ProductService {
     });
   }
 
-  async getProductById(id: string): Promise<Product | null> {
+  async getProductById(id: string, userId?: string): Promise<Product | null> {
     return prisma.product.findUnique({
       where: { id },
       include: {
@@ -63,7 +63,7 @@ export class ProductService {
     });
   }
 
-  async updateProduct(id: string, data: UpdateProductDto): Promise<Product> {
+  async updateProduct(id: string, data: UpdateProductDto, userId?: string): Promise<Product> {
     if (data.sku) {
       const existingSku = await prisma.product.findFirst({
         where: { sku: data.sku, NOT: { id } },
@@ -82,14 +82,23 @@ export class ProductService {
       }
     }
 
+    const where: any = { id };
+    if (userId) {
+      where.userId = userId;
+    }
+
     return prisma.product.update({
-      where: { id },
+      where,
       data,
     });
   }
 
-  async deleteProduct(id: string): Promise<void> {
-    await prisma.product.delete({ where: { id } });
+  async deleteProduct(id: string, userId?: string): Promise<void> {
+    const where: any = { id };
+    if (userId) {
+      where.userId = userId;
+    }
+    await prisma.product.delete({ where });
   }
 
   // Category CRUD operations

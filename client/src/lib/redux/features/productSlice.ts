@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { apiClient } from '@/lib/api';
 
 // Types
 interface Product {
@@ -66,39 +66,51 @@ export const fetchProducts = createAsyncThunk(
     if (search) params.append('search', search);
     if (categoryId) params.append('categoryId', categoryId);
     
-    const response = await axios.get(`/api/products?${params.toString()}`);
-    return response.data.data;
+    const response = await apiClient.get(`/api/products?${params.toString()}`);
+    const data = await response.json();
+    return data.data;
   }
 );
 
 export const fetchProduct = createAsyncThunk(
   'product/fetchProduct',
   async (id: string) => {
-    const response = await axios.get(`/api/products/${id}`);
-    return response.data.data;
+    const response = await apiClient.get(`/api/products/${id}`);
+    const data = await response.json();
+    return data.data;
   }
 );
 
 export const createProduct = createAsyncThunk(
   'product/createProduct',
   async (data: FormData) => {
-    const response = await axios.post('/api/products', data);
-    return response.data.data;
+    const response = await apiClient.request('/api/products', {
+      method: 'POST',
+      body: data,
+      headers: {} // Don't set Content-Type for FormData
+    });
+    const result = await response.json();
+    return result.data;
   }
 );
 
 export const updateProduct = createAsyncThunk(
   'product/updateProduct',
   async ({ id, data }: { id: string; data: FormData }) => {
-    const response = await axios.put(`/api/products/${id}`, data);
-    return response.data.data;
+    const response = await apiClient.request(`/api/products/${id}`, {
+      method: 'PUT',
+      body: data,
+      headers: {} // Don't set Content-Type for FormData
+    });
+    const result = await response.json();
+    return result.data;
   }
 );
 
 export const deleteProduct = createAsyncThunk(
   'product/deleteProduct',
   async (id: string) => {
-    await axios.delete(`/api/products/${id}`);
+    await apiClient.delete(`/api/products/${id}`);
     return id;
   }
 );
@@ -106,31 +118,34 @@ export const deleteProduct = createAsyncThunk(
 export const fetchCategories = createAsyncThunk(
   'product/fetchCategories',
   async () => {
-    const response = await axios.get('/api/products/categories');
-    return response.data.data;
+    const response = await apiClient.get('/api/products/categories');
+    const data = await response.json();
+    return data.data;
   }
 );
 
 export const createCategory = createAsyncThunk(
   'product/createCategory',
   async (data: { name: string; description?: string }) => {
-    const response = await axios.post('/api/products/categories', data);
-    return response.data.data;
+    const response = await apiClient.post('/api/products/categories', data);
+    const result = await response.json();
+    return result.data;
   }
 );
 
 export const updateCategory = createAsyncThunk(
   'product/updateCategory',
   async ({ id, data }: { id: string; data: { name?: string; description?: string } }) => {
-    const response = await axios.put(`/api/products/categories/${id}`, data);
-    return response.data.data;
+    const response = await apiClient.put(`/api/products/categories/${id}`, data);
+    const result = await response.json();
+    return result.data;
   }
 );
 
 export const deleteCategory = createAsyncThunk(
   'product/deleteCategory',
   async (id: string) => {
-    await axios.delete(`/api/products/categories/${id}`);
+    await apiClient.delete(`/api/products/categories/${id}`);
     return id;
   }
 );
@@ -138,16 +153,18 @@ export const deleteCategory = createAsyncThunk(
 export const createStockMovement = createAsyncThunk(
   'product/createStockMovement',
   async (data: { type: 'IN' | 'OUT' | 'ADJUSTMENT'; quantity: number; reason?: string; productId: string }) => {
-    const response = await axios.post('/api/products/stock-movements', data);
-    return response.data.data;
+    const response = await apiClient.post('/api/products/stock-movements', data);
+    const result = await response.json();
+    return result.data;
   }
 );
 
 export const fetchStockMovements = createAsyncThunk(
   'product/fetchStockMovements',
   async (productId: string) => {
-    const response = await axios.get(`/api/products/stock-movements/${productId}`);
-    return response.data.data;
+    const response = await apiClient.get(`/api/products/stock-movements/${productId}`);
+    const data = await response.json();
+    return data.data;
   }
 );
 

@@ -29,7 +29,7 @@ export interface AuthResponse {
 }
 
 export interface JWTPayload {
-  id: string;
+  userId: string;
   email: string;
   role: string;
 }
@@ -40,6 +40,7 @@ export interface AuthTokens {
 }
 
 export interface GoogleUser {
+  id: string;
   email: string;
   name: string;
   picture?: string;

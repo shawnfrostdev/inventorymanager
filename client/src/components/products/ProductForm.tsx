@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/lib/redux/hooks';
 import { fetchCategories } from '@/lib/redux/features/productSlice';
 import Image from 'next/image';
+import BarcodeGenerator, { generateBarcode, validateBarcode } from './BarcodeGenerator';
 
 interface ProductFormData {
   name: string;
@@ -150,13 +151,39 @@ export default function ProductForm({ initialData, onSubmit, isLoading }: Produc
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Barcode
             </label>
-            <input
-              type="text"
-              name="barcode"
-              value={formData.barcode}
-              onChange={handleChange}
-              className="w-full p-2 border rounded"
-            />
+            <div className="flex gap-2">
+              <input
+                type="text"
+                name="barcode"
+                value={formData.barcode}
+                onChange={handleChange}
+                className="flex-1 p-2 border rounded"
+                placeholder="Enter barcode or generate one"
+              />
+              <button
+                type="button"
+                onClick={() => {
+                  const newBarcode = generateBarcode();
+                  setFormData(prev => ({ ...prev, barcode: newBarcode }));
+                }}
+                className="px-3 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 text-sm"
+              >
+                Generate
+              </button>
+            </div>
+            {formData.barcode && validateBarcode(formData.barcode) && (
+              <div className="mt-2 p-2 bg-gray-50 rounded">
+                <BarcodeGenerator 
+                  value={formData.barcode} 
+                  width={1}
+                  height={50}
+                  fontSize={12}
+                />
+              </div>
+            )}
+            {formData.barcode && !validateBarcode(formData.barcode) && (
+              <p className="text-red-500 text-xs mt-1">Invalid barcode format</p>
+            )}
           </div>
 
           <div>

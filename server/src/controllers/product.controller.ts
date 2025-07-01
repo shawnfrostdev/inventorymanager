@@ -34,6 +34,7 @@ export const createProduct = catchAsync(async (req, res) => {
 
 export const getProducts = catchAsync(async (req, res) => {
   const { search, categoryId } = req.query;
+  
   const products = await productService.getProducts({
     search: search as string,
     categoryId: categoryId as string,
@@ -48,6 +49,7 @@ export const getProducts = catchAsync(async (req, res) => {
 
 export const getProduct = catchAsync(async (req, res) => {
   const { id } = req.params;
+  
   const product = await productService.getProductById(id);
 
   if (!product) {
@@ -63,13 +65,14 @@ export const getProduct = catchAsync(async (req, res) => {
 
 export const updateProduct = catchAsync(async (req, res) => {
   const { id } = req.params;
+  const userId = req.user?.id; // Get user ID from authenticated request
   let imageUrl;
 
   if (req.file) {
     imageUrl = await S3Service.uploadFile(req.file);
   }
 
-  const product = await productService.updateProduct(id, { ...req.body, imageUrl });
+  const product = await productService.updateProduct(id, { ...req.body, imageUrl }, userId);
   
   res.json({
     status: 'success',
@@ -80,7 +83,9 @@ export const updateProduct = catchAsync(async (req, res) => {
 
 export const deleteProduct = catchAsync(async (req, res) => {
   const { id } = req.params;
-  await productService.deleteProduct(id);
+  const userId = req.user?.id; // Get user ID from authenticated request
+  
+  await productService.deleteProduct(id, userId);
   
   res.json({
     status: 'success',

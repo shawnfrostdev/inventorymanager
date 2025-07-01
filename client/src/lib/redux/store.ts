@@ -23,6 +23,17 @@ const storage = typeof window !== 'undefined'
   ? require('redux-persist/lib/storage').default
   : createNoopStorage();
 
+// Suppress redux-persist SSR warnings
+if (typeof window === 'undefined') {
+  const originalConsoleWarn = console.warn;
+  console.warn = (...args) => {
+    if (args[0]?.includes?.('redux-persist failed to create sync storage')) {
+      return; // Suppress this specific warning
+    }
+    originalConsoleWarn(...args);
+  };
+}
+
 // Persist configuration for auth
 const persistConfig = {
   key: 'auth',

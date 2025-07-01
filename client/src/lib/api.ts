@@ -10,13 +10,21 @@ class ApiClient {
     if (typeof window === 'undefined') return {};
     
     const persistedAuth = localStorage.getItem('persist:auth');
-    if (!persistedAuth) return {};
+    if (!persistedAuth) {
+      console.warn('No auth data found in localStorage');
+      return {};
+    }
 
     try {
       const authData = JSON.parse(persistedAuth);
       const accessToken = authData.accessToken ? JSON.parse(authData.accessToken) : null;
       
-      return accessToken ? { Authorization: `Bearer ${accessToken}` } : {};
+      if (accessToken) {
+        return { Authorization: `Bearer ${accessToken}` };
+      } else {
+        console.warn('No access token found in auth data');
+        return {};
+      }
     } catch (error) {
       console.error('Error parsing auth data:', error);
       return {};
@@ -40,12 +48,14 @@ class ApiClient {
       const response = await fetch(url, config);
       
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const errorText = await response.text();
+        console.error(`API Error ${response.status} for ${url}:`, errorText);
+        throw new Error(`HTTP error! status: ${response.status} - ${errorText}`);
       }
 
       return response;
     } catch (error) {
-      console.error('API request failed:', error);
+      console.error(`API request failed for ${url}:`, error);
       throw error;
     }
   }
