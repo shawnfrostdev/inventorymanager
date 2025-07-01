@@ -67,4 +67,12 @@ export const writeLimiter = rateLimit({
   skip: (req) => {
     return req.method === 'GET';
   },
-}); 
+});
+
+// Export rateLimiter object for easier access
+export const rateLimiter = {
+  api: apiLimiter,
+  auth: authLimiter,
+  readEndpoints: readLimiter,
+  writeEndpoints: writeLimiter,
+}; 

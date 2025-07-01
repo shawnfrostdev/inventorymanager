@@ -102,7 +102,7 @@ export default function ProductDetailPage() {
 
   if (!currentProduct) {
     return (
-      <div className="container mx-auto px-4 py-8">
+      <div className="space-y-6">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-900">Product not found</h1>
           <Link href="/dashboard/products" className="text-blue-500 hover:underline">
@@ -117,31 +117,31 @@ export default function ProductDetailPage() {
                      currentProduct.quantity <= currentProduct.minQuantity ? 'low' : 'normal';
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="space-y-6">
       {/* Header */}
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center">
         <div className="flex items-center space-x-4">
           <Link href="/dashboard/products" className="text-blue-500 hover:underline">
             ← Back to Products
           </Link>
-          <h1 className="text-3xl font-bold">{currentProduct.name}</h1>
+          <h1 className="text-2xl font-bold text-gray-900">{currentProduct.name}</h1>
         </div>
         <div className="flex space-x-2">
           <button
             onClick={() => setShowStockModal(true)}
-            className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+            className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors"
           >
             Adjust Stock
           </button>
           <Link
             href={`/dashboard/products/${productId}/edit`}
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
           >
             Edit Product
           </Link>
           <button
             onClick={handleDeleteProduct}
-            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+            className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors"
           >
             Delete
           </button>

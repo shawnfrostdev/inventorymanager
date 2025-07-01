@@ -74,7 +74,7 @@ export default function DashboardLayout({
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.auth);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -83,7 +83,7 @@ export default function DashboardLayout({
 
   return (
     <ProtectedRoute>
-      <div className="min-h-screen bg-gray-100 flex">
+      <div className="min-h-screen bg-gray-50">
         {/* Sidebar */}
         <div
           className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform ${
@@ -97,7 +97,7 @@ export default function DashboardLayout({
             </Link>
             <button
               onClick={() => setIsSidebarOpen(false)}
-              className="lg:hidden"
+              className="lg:hidden p-1 rounded-md hover:bg-blue-700 transition-colors"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -107,30 +107,33 @@ export default function DashboardLayout({
 
           {/* Navigation - Takes remaining space */}
           <nav className="flex-1 px-4 py-6 overflow-y-auto">
-            {navigation.map((item) => {
-              const isActive = pathname === item.href;
-              return (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className={`flex items-center px-2 py-2 mt-2 text-sm font-medium rounded-md transition-colors ${
-                    isActive
-                      ? 'text-blue-600 bg-blue-50'
-                      : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
-                  }`}
-                >
-                  {item.icon}
-                  <span className="ml-3">{item.name}</span>
-                </Link>
-              );
-            })}
+            <div className="space-y-1">
+              {navigation.map((item) => {
+                const isActive = pathname === item.href;
+                return (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    onClick={() => setIsSidebarOpen(false)}
+                    className={`flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
+                      isActive
+                        ? 'text-blue-600 bg-blue-50 border-r-2 border-blue-600'
+                        : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'
+                    }`}
+                  >
+                    <span className="flex-shrink-0">{item.icon}</span>
+                    <span className="ml-3">{item.name}</span>
+                  </Link>
+                );
+              })}
+            </div>
           </nav>
 
           {/* User info and logout - Fixed at bottom */}
           <div className="flex-shrink-0 p-4 border-t bg-gray-50">
             <div className="flex items-center mb-3">
-              <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
-                <span className="text-sm font-medium text-gray-600">
+              <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+                <span className="text-sm font-medium text-white">
                   {user?.name?.charAt(0).toUpperCase() || 'U'}
                 </span>
               </div>
@@ -141,7 +144,7 @@ export default function DashboardLayout({
             </div>
             <button
               onClick={handleLogout}
-              className="w-full flex items-center px-2 py-2 text-sm font-medium text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors"
+              className="w-full flex items-center px-3 py-2 text-sm font-medium text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
             >
               <svg className="w-5 h-5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
@@ -152,26 +155,37 @@ export default function DashboardLayout({
         </div>
 
         {/* Main content */}
-        <div className="flex-1 lg:ml-64">
-          {/* Top bar - only show on mobile */}
-          <div className="sticky top-0 z-10 flex items-center justify-between h-16 px-4 bg-white shadow-sm lg:hidden">
-            <button
-              onClick={() => setIsSidebarOpen(true)}
-              className="p-1 text-gray-400"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
+        <div className="lg:ml-64">
+          {/* Top bar - show on mobile and desktop for consistency */}
+          <header className="sticky top-0 z-10 bg-white border-b border-gray-200 lg:border-b-0 lg:bg-transparent">
+            <div className="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
+              {/* Mobile menu button */}
+              <button
+                onClick={() => setIsSidebarOpen(true)}
+                className="p-2 text-gray-400 hover:text-gray-500 hover:bg-gray-100 rounded-md lg:hidden"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              </button>
 
-            <div className="flex items-center space-x-4">
-              <span className="text-sm text-gray-600">Welcome back, {user?.name || 'User'}</span>
+              {/* Desktop spacer */}
+              <div className="hidden lg:block"></div>
+
+              {/* User greeting */}
+              <div className="flex items-center space-x-4">
+                <span className="text-sm text-gray-600 hidden sm:block">
+                  Welcome back, {user?.name || 'User'}
+                </span>
+              </div>
             </div>
-          </div>
+          </header>
 
-          {/* Page content */}
-          <main className="flex-1 bg-gray-100">
-            {children}
+          {/* Page content with consistent padding */}
+          <main className="min-h-[calc(100vh-4rem)] bg-gray-50">
+            <div className="px-4 py-6 sm:px-6 lg:px-8">
+              {children}
+            </div>
           </main>
         </div>
 

@@ -1,287 +1,514 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '@/lib/redux/hooks';
-import { fetchProducts, fetchCategories } from '@/lib/redux/features/productSlice';
-import Link from 'next/link';
+import { useState, useEffect } from 'react';
+import { apiClient } from '../../../lib/api';
 
-interface ReportData {
+interface KPIMetric {
+  id: string;
+  name: string;
+  category: string;
+  value: number;
+  target?: number;
+  unit: string;
+  trend: 'up' | 'down' | 'stable';
+  trendPercentage: number;
+  lastUpdated: string;
+  description: string;
+}
+
+interface SalesAnalytics {
+  totalRevenue: number;
+  totalOrders: number;
+  averageOrderValue: number;
+  conversionRate: number;
+  topProducts: Array<{
+    productId: string;
+    productName: string;
+    revenue: number;
+    quantity: number;
+    growth: number;
+  }>;
+  salesByPeriod: Array<{
+    period: string;
+    revenue: number;
+    orders: number;
+    customers: number;
+  }>;
+}
+
+interface InventoryAnalytics {
   totalProducts: number;
-  totalCategories: number;
-  totalValue: number;
-  lowStockCount: number;
-  outOfStockCount: number;
-  categoryBreakdown: { name: string; count: number; value: number }[];
-  stockStatusBreakdown: { status: string; count: number; percentage: number }[];
-  topValueProducts: any[];
-  topStockProducts: any[];
+  totalStockValue: number;
+  lowStockItems: number;
+  stockTurnover: number;
+  stockAlerts: Array<{
+    productId: string;
+    productName: string;
+    currentStock: number;
+    reorderLevel: number;
+    daysUntilStockout: number;
+  }>;
+}
+
+interface CustomerAnalytics {
+  totalCustomers: number;
+  activeCustomers: number;
+  newCustomers: number;
+  customerRetentionRate: number;
+  customerLifetimeValue: number;
+  customerSegments: Array<{
+    segment: string;
+    count: number;
+    percentage: number;
+    averageSpent: number;
+  }>;
 }
 
 export default function ReportsPage() {
-  const dispatch = useAppDispatch();
-  const { products, categories, loading } = useAppSelector((state) => state.product);
-  const [reportData, setReportData] = useState<ReportData | null>(null);
-  const [selectedTimeframe, setSelectedTimeframe] = useState('all');
+  const [kpis, setKpis] = useState<KPIMetric[]>([]);
+  const [salesAnalytics, setSalesAnalytics] = useState<SalesAnalytics | null>(null);
+  const [inventoryAnalytics, setInventoryAnalytics] = useState<InventoryAnalytics | null>(null);
+  const [customerAnalytics, setCustomerAnalytics] = useState<CustomerAnalytics | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState('overview');
+  const [selectedPeriod, setSelectedPeriod] = useState('month');
 
   useEffect(() => {
-    dispatch(fetchProducts({}));
-    dispatch(fetchCategories());
-  }, [dispatch]);
+    fetchDashboardData();
+  }, [selectedPeriod]);
 
-  useEffect(() => {
-    if (products.length > 0 && categories.length > 0) {
-      generateReportData();
+  const fetchDashboardData = async () => {
+    try {
+      setLoading(true);
+      
+      const [kpisResponse, salesResponse, inventoryResponse, customerResponse] = await Promise.all([
+        apiClient.get('/api/reports/kpis/all'),
+        apiClient.get(`/api/reports/analytics/sales?type=sales&period=${selectedPeriod}`),
+        apiClient.get('/api/reports/analytics/inventory?type=inventory'),
+        apiClient.get('/api/reports/analytics/customers?type=customer')
+      ]);
+
+      const [kpisData, salesData, inventoryData, customerData] = await Promise.all([
+        kpisResponse.json(),
+        salesResponse.json(),
+        inventoryResponse.json(),
+        customerResponse.json()
+      ]);
+
+      setKpis(kpisData.data || []);
+      setSalesAnalytics(salesData.data);
+      setInventoryAnalytics(inventoryData.data);
+      setCustomerAnalytics(customerData.data);
+      
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An error occurred');
+    } finally {
+      setLoading(false);
     }
-  }, [products, categories]);
-
-  const generateReportData = () => {
-    const totalProducts = products.length;
-    const totalCategories = categories.length;
-    const totalValue = products.reduce((sum, product) => sum + (product.quantity * product.cost), 0);
-    
-    const lowStockCount = products.filter(p => p.quantity <= p.minQuantity && p.quantity > 0).length;
-    const outOfStockCount = products.filter(p => p.quantity === 0).length;
-    
-    // Category breakdown
-    const categoryBreakdown = categories.map(category => {
-      const categoryProducts = products.filter(p => p.categoryId === category.id);
-      const categoryValue = categoryProducts.reduce((sum, p) => sum + (p.quantity * p.cost), 0);
-      return {
-        name: category.name,
-        count: categoryProducts.length,
-        value: categoryValue
-      };
-    });
-
-    // Stock status breakdown
-    const inStockCount = products.filter(p => p.quantity > p.minQuantity).length;
-    const stockStatusBreakdown = [
-      {
-        status: 'In Stock',
-        count: inStockCount,
-        percentage: (inStockCount / totalProducts) * 100
-      },
-      {
-        status: 'Low Stock',
-        count: lowStockCount,
-        percentage: (lowStockCount / totalProducts) * 100
-      },
-      {
-        status: 'Out of Stock',
-        count: outOfStockCount,
-        percentage: (outOfStockCount / totalProducts) * 100
-      }
-    ];
-
-    // Top products by value
-    const topValueProducts = [...products]
-      .sort((a, b) => (b.quantity * b.cost) - (a.quantity * a.cost))
-      .slice(0, 10);
-
-    // Top products by stock quantity
-    const topStockProducts = [...products]
-      .sort((a, b) => b.quantity - a.quantity)
-      .slice(0, 10);
-
-    setReportData({
-      totalProducts,
-      totalCategories,
-      totalValue,
-      lowStockCount,
-      outOfStockCount,
-      categoryBreakdown,
-      stockStatusBreakdown,
-      topValueProducts,
-      topStockProducts
-    });
   };
 
-  const exportToCSV = () => {
-    if (!reportData) return;
-
-    const csvContent = [
-      'Product Report',
-      '',
-      'Summary',
-      `Total Products,${reportData.totalProducts}`,
-      `Total Categories,${reportData.totalCategories}`,
-      `Total Inventory Value,$${reportData.totalValue.toFixed(2)}`,
-      `Low Stock Items,${reportData.lowStockCount}`,
-      `Out of Stock Items,${reportData.outOfStockCount}`,
-      '',
-      'Category Breakdown',
-      'Category,Product Count,Total Value',
-      ...reportData.categoryBreakdown.map(cat => 
-        `${cat.name},${cat.count},$${cat.value.toFixed(2)}`
-      ),
-      '',
-      'Product Details',
-      'Name,SKU,Category,Quantity,Cost,Price,Total Value',
-      ...products.map(product => 
-        `${product.name},${product.sku},${product.category?.name || 'N/A'},${product.quantity},$${product.cost},$${product.price},$${(product.quantity * product.cost).toFixed(2)}`
-      )
-    ].join('\n');
-
-    const blob = new Blob([csvContent], { type: 'text/csv' });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `inventory-report-${new Date().toISOString().split('T')[0]}.csv`;
-    a.click();
-    window.URL.revokeObjectURL(url);
+  const generateQuickReport = async (type: string) => {
+    try {
+      const response = await apiClient.get(`/api/reports/quick/${type}/${selectedPeriod}`);
+      const reportData = await response.json();
+      // You could open a new tab or download the report
+      console.log('Report generated:', reportData);
+      alert('Report generated successfully!');
+    } catch (err) {
+      alert('Failed to generate report: ' + (err instanceof Error ? err.message : 'Unknown error'));
+    }
   };
 
-  if (loading || !reportData) {
+  const formatCurrency = (value: number) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD'
+    }).format(value);
+  };
+
+  const formatNumber = (value: number) => {
+    return new Intl.NumberFormat('en-US').format(value);
+  };
+
+  const getTrendIcon = (trend: string) => {
+    switch (trend) {
+      case 'up':
+        return (
+          <svg className="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17l9.2-9.2M17 17V7M17 17H7" />
+          </svg>
+        );
+      case 'down':
+        return (
+          <svg className="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 7l-9.2 9.2M7 7v10M7 7h10" />
+          </svg>
+        );
+      default:
+        return (
+          <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
+          </svg>
+        );
+    }
+  };
+
+  if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900"></div>
+      <div className="min-h-screen p-6">
+        <div className="max-w-7xl mx-auto">
+          <h1 className="text-3xl font-bold text-gray-900 mb-8">Reports & Analytics</h1>
+          <div className="flex items-center justify-center h-64">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen p-6">
+        <div className="max-w-7xl mx-auto">
+          <h1 className="text-3xl font-bold text-gray-900 mb-8">Reports & Analytics</h1>
+          <div className="bg-red-50 border border-red-200 rounded-md p-4">
+            <div className="flex">
+              <div className="ml-3">
+                <h3 className="text-sm font-medium text-red-800">Error</h3>
+                <div className="mt-2 text-sm text-red-700">{error}</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="flex justify-between items-center mb-6">
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-3xl font-bold">Inventory Reports</h1>
-          <p className="text-gray-600">Analytics and insights for your inventory</p>
+          <h1 className="text-2xl font-semibold text-gray-900">Reports & Analytics</h1>
+          <p className="mt-1 text-sm text-gray-500">
+            Comprehensive business intelligence and reporting dashboard
+          </p>
         </div>
-        <div className="flex space-x-2">
+        
+        <div className="mt-4 sm:mt-0 flex space-x-3">
+          <select
+            value={selectedPeriod}
+            onChange={(e) => setSelectedPeriod(e.target.value)}
+            className="rounded-md border border-gray-300 px-3 py-2 text-sm"
+          >
+            <option value="week">This Week</option>
+            <option value="month">This Month</option>
+            <option value="quarter">This Quarter</option>
+            <option value="year">This Year</option>
+          </select>
+          
           <button
-            onClick={exportToCSV}
-            className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+            onClick={() => fetchDashboardData()}
+            className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            Export CSV
+            Refresh
           </button>
-          <Link
-            href="/dashboard"
-            className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
-          >
-            Back to Dashboard
-          </Link>
         </div>
       </div>
 
-      {/* Summary Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
-        <div className="bg-white p-6 rounded-lg shadow border">
-          <h3 className="text-sm font-medium text-gray-500">Total Products</h3>
-          <p className="text-2xl font-bold text-gray-900">{reportData.totalProducts}</p>
-        </div>
-        <div className="bg-white p-6 rounded-lg shadow border">
-          <h3 className="text-sm font-medium text-gray-500">Categories</h3>
-          <p className="text-2xl font-bold text-gray-900">{reportData.totalCategories}</p>
-        </div>
-        <div className="bg-white p-6 rounded-lg shadow border">
-          <h3 className="text-sm font-medium text-gray-500">Total Value</h3>
-          <p className="text-2xl font-bold text-green-600">${reportData.totalValue.toFixed(2)}</p>
-        </div>
-        <div className="bg-white p-6 rounded-lg shadow border">
-          <h3 className="text-sm font-medium text-gray-500">Low Stock</h3>
-          <p className="text-2xl font-bold text-orange-600">{reportData.lowStockCount}</p>
-        </div>
-        <div className="bg-white p-6 rounded-lg shadow border">
-          <h3 className="text-sm font-medium text-gray-500">Out of Stock</h3>
-          <p className="text-2xl font-bold text-red-600">{reportData.outOfStockCount}</p>
-        </div>
+      {/* Tabs */}
+      <div className="border-b border-gray-200">
+        <nav className="-mb-px flex space-x-8">
+          {[
+            { id: 'overview', name: 'Overview', icon: '📊' },
+            { id: 'sales', name: 'Sales Analytics', icon: '💰' },
+            { id: 'inventory', name: 'Inventory', icon: '📦' },
+            { id: 'customers', name: 'Customers', icon: '👥' },
+            { id: 'reports', name: 'Reports', icon: '📋' }
+          ].map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`py-2 px-1 border-b-2 font-medium text-sm whitespace-nowrap ${
+                activeTab === tab.id
+                  ? 'border-blue-500 text-blue-600'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+              }`}
+            >
+              <span className="mr-2">{tab.icon}</span>
+              {tab.name}
+            </button>
+          ))}
+        </nav>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-        {/* Category Breakdown */}
-        <div className="bg-white p-6 rounded-lg shadow border">
-          <h2 className="text-xl font-semibold mb-4">Category Breakdown</h2>
-          <div className="space-y-3">
-            {reportData.categoryBreakdown.map((category, index) => (
-              <div key={index} className="flex justify-between items-center p-3 bg-gray-50 rounded">
-                <div>
-                  <p className="font-medium">{category.name}</p>
-                  <p className="text-sm text-gray-600">{category.count} products</p>
-                </div>
-                <div className="text-right">
-                  <p className="font-semibold">${category.value.toFixed(2)}</p>
-                  <p className="text-sm text-gray-600">
-                    {((category.value / reportData.totalValue) * 100).toFixed(1)}%
-                  </p>
+      {/* Overview Tab */}
+      {activeTab === 'overview' && (
+        <div className="space-y-6">
+          {/* KPI Cards */}
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {kpis.slice(0, 4).map((kpi) => (
+              <div key={kpi.id} className="bg-white overflow-hidden shadow rounded-lg">
+                <div className="p-5">
+                  <div className="flex items-center">
+                    <div className="flex-shrink-0">
+                      {getTrendIcon(kpi.trend)}
+                    </div>
+                    <div className="ml-5 w-0 flex-1">
+                      <dl>
+                        <dt className="text-sm font-medium text-gray-500 truncate">{kpi.name}</dt>
+                        <dd className="flex items-baseline">
+                          <div className="text-2xl font-semibold text-gray-900">
+                            {kpi.unit === 'currency' ? formatCurrency(kpi.value) : formatNumber(kpi.value)}
+                          </div>
+                          {kpi.trendPercentage !== 0 && (
+                            <div className={`ml-2 flex items-baseline text-sm font-semibold ${
+                              kpi.trend === 'up' ? 'text-green-600' : kpi.trend === 'down' ? 'text-red-600' : 'text-gray-600'
+                            }`}>
+                              {kpi.trendPercentage > 0 ? '+' : ''}{kpi.trendPercentage.toFixed(1)}%
+                            </div>
+                          )}
+                        </dd>
+                      </dl>
+                    </div>
+                  </div>
+                  {kpi.target && (
+                    <div className="mt-2">
+                      <div className="flex items-center justify-between text-xs text-gray-500">
+                        <span>Target: {kpi.unit === 'currency' ? formatCurrency(kpi.target) : formatNumber(kpi.target)}</span>
+                        <span>{((kpi.value / kpi.target) * 100).toFixed(0)}%</span>
+                      </div>
+                      <div className="mt-1 w-full bg-gray-200 rounded-full h-2">
+                        <div
+                          className="bg-blue-600 h-2 rounded-full"
+                          style={{ width: `${Math.min(100, (kpi.value / kpi.target) * 100)}%` }}
+                        ></div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
           </div>
-        </div>
 
-        {/* Stock Status */}
-        <div className="bg-white p-6 rounded-lg shadow border">
-          <h2 className="text-xl font-semibold mb-4">Stock Status Distribution</h2>
-          <div className="space-y-4">
-            {reportData.stockStatusBreakdown.map((status, index) => (
-              <div key={index} className="space-y-2">
+          {/* Quick Summary */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="bg-white shadow rounded-lg p-6">
+              <h3 className="text-lg font-medium text-gray-900 mb-4">Sales Performance</h3>
+              {salesAnalytics && (
+                <div className="space-y-3">
+                  <div className="flex justify-between">
+                    <span className="text-sm text-gray-500">Total Revenue</span>
+                    <span className="text-sm font-medium">{formatCurrency(salesAnalytics.totalRevenue)}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-sm text-gray-500">Total Orders</span>
+                    <span className="text-sm font-medium">{formatNumber(salesAnalytics.totalOrders)}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-sm text-gray-500">Average Order Value</span>
+                    <span className="text-sm font-medium">{formatCurrency(salesAnalytics.averageOrderValue)}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-sm text-gray-500">Conversion Rate</span>
+                    <span className="text-sm font-medium">{salesAnalytics.conversionRate.toFixed(1)}%</span>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div className="bg-white shadow rounded-lg p-6">
+              <h3 className="text-lg font-medium text-gray-900 mb-4">Inventory Overview</h3>
+              {inventoryAnalytics && (
+                <div className="space-y-3">
+                  <div className="flex justify-between">
+                    <span className="text-sm text-gray-500">Total Products</span>
+                    <span className="text-sm font-medium">{formatNumber(inventoryAnalytics.totalProducts)}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-sm text-gray-500">Stock Value</span>
+                    <span className="text-sm font-medium">{formatCurrency(inventoryAnalytics.totalStockValue)}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-sm text-gray-500">Low Stock Items</span>
+                    <span className="text-sm font-medium text-red-600">{inventoryAnalytics.lowStockItems}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-sm text-gray-500">Turnover Rate</span>
+                    <span className="text-sm font-medium">{inventoryAnalytics.stockTurnover.toFixed(1)}x</span>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Sales Analytics Tab */}
+      {activeTab === 'sales' && salesAnalytics && (
+        <div className="space-y-6">
+          <div className="bg-white shadow rounded-lg p-6">
+            <h3 className="text-lg font-medium text-gray-900 mb-4">Top Performing Products</h3>
+            <div className="overflow-x-auto">
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead className="bg-gray-50">
+                  <tr>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Product</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Revenue</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quantity</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Growth</th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                  {salesAnalytics.topProducts.map((product, index) => (
+                    <tr key={product.productId}>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                        {product.productName}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        {formatCurrency(product.revenue)}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        {formatNumber(product.quantity)}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm">
+                        <span className={`font-medium ${
+                          product.growth > 0 ? 'text-green-600' : product.growth < 0 ? 'text-red-600' : 'text-gray-600'
+                        }`}>
+                          {product.growth > 0 ? '+' : ''}{product.growth.toFixed(1)}%
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Inventory Tab */}
+      {activeTab === 'inventory' && inventoryAnalytics && (
+        <div className="space-y-6">
+          <div className="bg-white shadow rounded-lg p-6">
+            <h3 className="text-lg font-medium text-gray-900 mb-4">Stock Alerts</h3>
+            <div className="overflow-x-auto">
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead className="bg-gray-50">
+                  <tr>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Product</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Current Stock</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Reorder Level</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Days Until Stockout</th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                  {inventoryAnalytics.stockAlerts.map((alert) => (
+                    <tr key={alert.productId}>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                        {alert.productName}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        {alert.currentStock}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        {alert.reorderLevel}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm">
+                        <span className={`font-medium ${
+                          alert.daysUntilStockout <= 7 ? 'text-red-600' : alert.daysUntilStockout <= 30 ? 'text-yellow-600' : 'text-green-600'
+                        }`}>
+                          {alert.daysUntilStockout === 999 ? 'N/A' : `${alert.daysUntilStockout} days`}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Customers Tab */}
+      {activeTab === 'customers' && customerAnalytics && (
+        <div className="space-y-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="bg-white shadow rounded-lg p-6">
+              <h3 className="text-lg font-medium text-gray-900 mb-4">Customer Metrics</h3>
+              <div className="space-y-3">
                 <div className="flex justify-between">
-                  <span className="font-medium">{status.status}</span>
-                  <span>{status.count} ({status.percentage.toFixed(1)}%)</span>
+                  <span className="text-sm text-gray-500">Total Customers</span>
+                  <span className="text-sm font-medium">{formatNumber(customerAnalytics.totalCustomers)}</span>
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div
-                    className={`h-2 rounded-full ${
-                      status.status === 'In Stock' ? 'bg-green-500' :
-                      status.status === 'Low Stock' ? 'bg-orange-500' : 'bg-red-500'
-                    }`}
-                    style={{ width: `${status.percentage}%` }}
-                  ></div>
+                <div className="flex justify-between">
+                  <span className="text-sm text-gray-500">Active Customers</span>
+                  <span className="text-sm font-medium">{formatNumber(customerAnalytics.activeCustomers)}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-sm text-gray-500">New Customers</span>
+                  <span className="text-sm font-medium">{formatNumber(customerAnalytics.newCustomers)}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-sm text-gray-500">Retention Rate</span>
+                  <span className="text-sm font-medium">{customerAnalytics.customerRetentionRate.toFixed(1)}%</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-sm text-gray-500">Customer Lifetime Value</span>
+                  <span className="text-sm font-medium">{formatCurrency(customerAnalytics.customerLifetimeValue)}</span>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </div>
+            </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Top Products by Value */}
-        <div className="bg-white p-6 rounded-lg shadow border">
-          <h2 className="text-xl font-semibold mb-4">Top Products by Value</h2>
-          <div className="space-y-3">
-            {reportData.topValueProducts.map((product, index) => (
-              <div key={product.id} className="flex justify-between items-center p-3 hover:bg-gray-50 rounded">
-                <div className="flex items-center space-x-3">
-                  <span className="w-6 h-6 bg-blue-500 text-white text-xs rounded-full flex items-center justify-center">
-                    {index + 1}
-                  </span>
-                  <div>
-                    <p className="font-medium">{product.name}</p>
-                    <p className="text-sm text-gray-600">Qty: {product.quantity}</p>
+            <div className="bg-white shadow rounded-lg p-6">
+              <h3 className="text-lg font-medium text-gray-900 mb-4">Customer Segments</h3>
+              <div className="space-y-3">
+                {customerAnalytics.customerSegments.map((segment) => (
+                  <div key={segment.segment} className="flex items-center justify-between">
+                    <div className="flex items-center">
+                      <span className="text-sm font-medium text-gray-900">{segment.segment}</span>
+                      <span className="ml-2 text-xs text-gray-500">({segment.percentage.toFixed(1)}%)</span>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-sm font-medium">{segment.count} customers</div>
+                      <div className="text-xs text-gray-500">Avg: {formatCurrency(segment.averageSpent)}</div>
+                    </div>
                   </div>
-                </div>
-                <div className="text-right">
-                  <p className="font-semibold">${(product.quantity * product.cost).toFixed(2)}</p>
-                  <p className="text-sm text-gray-600">${product.cost}/unit</p>
-                </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
         </div>
+      )}
 
-        {/* Top Products by Stock */}
-        <div className="bg-white p-6 rounded-lg shadow border">
-          <h2 className="text-xl font-semibold mb-4">Top Products by Stock Quantity</h2>
-          <div className="space-y-3">
-            {reportData.topStockProducts.map((product, index) => (
-              <div key={product.id} className="flex justify-between items-center p-3 hover:bg-gray-50 rounded">
-                <div className="flex items-center space-x-3">
-                  <span className="w-6 h-6 bg-green-500 text-white text-xs rounded-full flex items-center justify-center">
-                    {index + 1}
-                  </span>
-                  <div>
-                    <p className="font-medium">{product.name}</p>
-                    <p className="text-sm text-gray-600">{product.category?.name}</p>
-                  </div>
+      {/* Reports Tab */}
+      {activeTab === 'reports' && (
+        <div className="space-y-6">
+          <div className="bg-white shadow rounded-lg p-6">
+            <h3 className="text-lg font-medium text-gray-900 mb-4">Quick Reports</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {[
+                { id: 'sales-summary', name: 'Sales Summary', description: 'Comprehensive sales performance report' },
+                { id: 'inventory-levels', name: 'Inventory Report', description: 'Current stock levels and alerts' },
+                { id: 'customer-analysis', name: 'Customer Analysis', description: 'Customer behavior and segmentation' },
+                { id: 'financial-performance', name: 'Financial Report', description: 'Revenue, costs, and profit analysis' }
+              ].map((report) => (
+                <div key={report.id} className="border border-gray-200 rounded-lg p-4">
+                  <h4 className="text-sm font-medium text-gray-900">{report.name}</h4>
+                  <p className="mt-1 text-xs text-gray-500">{report.description}</p>
+                  <button
+                    onClick={() => generateQuickReport(report.id)}
+                    className="mt-3 w-full px-3 py-2 border border-transparent text-sm font-medium rounded-md text-blue-600 bg-blue-50 hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  >
+                    Generate Report
+                  </button>
                 </div>
-                <div className="text-right">
-                  <p className="font-semibold">{product.quantity} units</p>
-                  <p className="text-sm text-gray-600">Min: {product.minQuantity}</p>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 } 

@@ -1,0 +1,204 @@
+config:
+  target: 'http://localhost:5000'
+  phases:
+    # Warm-up phase
+    - duration: 30
+      arrivalRate: 5
+      name: "Warm-up"
+    # Ramp-up phase
+    - duration: 60
+      arrivalRate: 10
+      rampTo: 50
+      name: "Ramp-up"
+    # Sustained load phase
+    - duration: 120
+      arrivalRate: 50
+      name: "Sustained load"
+    # Peak load phase
+    - duration: 60
+      arrivalRate: 100
+      name: "Peak load"
+  defaults:
+    headers:
+      Content-Type: 'application/json'
+  variables:
+    testEmail: 'test-{{ $randomInt(1, 10000) }}@example.com'
+    testPassword: 'password123'
+
+scenarios:
+  # Authentication Flow Testing
+  - name: "User Authentication Flow"
+    weight: 30
+    flow:
+      - post:
+          url: "/api/auth/register"
+          json:
+            email: "{{ testEmail }}"
+            password: "{{ testPassword }}"
+            name: "Test User {{ $randomInt(1, 1000) }}"
+          capture:
+            - json: "$.success"
+              as: "registerSuccess"
+      - think: 1
+      
+      # Create a verified user for login testing
+      - post:
+          url: "/api/auth/login"
+          json:
+            email: "sohandesignz@gmail.com"  # Use existing verified user
+            password: "password123"
+          capture:
+            - json: "$.accessToken"
+              as: "accessToken"
+            - json: "$.refreshToken"
+              as: "refreshToken"
+      - think: 2
+
+      # Test token refresh
+      - post:
+          url: "/api/auth/refresh"
+          json:
+            refreshToken: "{{ refreshToken }}"
+          capture:
+            - json: "$.accessToken"
+              as: "newAccessToken"
+
+  # Product Management Testing
+  - name: "Product Operations"
+    weight: 40
+    flow:
+      # Login first to get token
+      - post:
+          url: "/api/auth/login"
+          json:
+            email: "sohandesignz@gmail.com"
+            password: "password123"
+          capture:
+            - json: "$.accessToken"
+              as: "authToken"
+      
+      - think: 1
+      
+      # Get products list
+      - get:
+          url: "/api/products"
+          headers:
+            Authorization: "Bearer {{ authToken }}"
+      
+      - think: 1
+      
+      # Create a product
+      - post:
+          url: "/api/products"
+          headers:
+            Authorization: "Bearer {{ authToken }}"
+          json:
+            name: "Load Test Product {{ $randomInt(1, 10000) }}"
+            description: "Product created during load testing"
+            sku: "LOAD-{{ $randomInt(1, 10000) }}"
+            price: "{{ $randomInt(10, 1000) }}"
+            cost: "{{ $randomInt(5, 500) }}"
+            quantity: "{{ $randomInt(10, 100) }}"
+            minQuantity: 5
+            categoryId: "cm4w6bvoj0000mhdtpgqmu8k4"  # Use existing category ID
+          capture:
+            - json: "$.product.id"
+              as: "productId"
+      
+      - think: 2
+      
+      # Update the product
+      - put:
+          url: "/api/products/{{ productId }}"
+          headers:
+            Authorization: "Bearer {{ authToken }}"
+          json:
+            price: "{{ $randomInt(20, 2000) }}"
+            quantity: "{{ $randomInt(5, 50) }}"
+
+  # Analytics and Reports Testing
+  - name: "Analytics & Reports"
+    weight: 20
+    flow:
+      # Login first
+      - post:
+          url: "/api/auth/login"
+          json:
+            email: "sohandesignz@gmail.com"
+            password: "password123"
+          capture:
+            - json: "$.accessToken"
+              as: "authToken"
+      
+      - think: 1
+      
+      # Test various analytics endpoints
+      - get:
+          url: "/api/reports/kpis/all"
+          headers:
+            Authorization: "Bearer {{ authToken }}"
+      
+      - get:
+          url: "/api/reports/analytics/sales?period=month"
+          headers:
+            Authorization: "Bearer {{ authToken }}"
+      
+      - get:
+          url: "/api/reports/analytics/inventory"
+          headers:
+            Authorization: "Bearer {{ authToken }}"
+      
+      - get:
+          url: "/api/reports/analytics/customers"
+          headers:
+            Authorization: "Bearer {{ authToken }}"
+
+  # Order Management Testing
+  - name: "Order Operations"
+    weight: 10
+    flow:
+      # Login first
+      - post:
+          url: "/api/auth/login"
+          json:
+            email: "sohandesignz@gmail.com"
+            password: "password123"
+          capture:
+            - json: "$.accessToken"
+              as: "authToken"
+      
+      - think: 1
+      
+      # Get orders list
+      - get:
+          url: "/api/orders"
+          headers:
+            Authorization: "Bearer {{ authToken }}"
+      
+      # Create an order
+      - post:
+          url: "/api/orders"
+          headers:
+            Authorization: "Bearer {{ authToken }}"
+          json:
+            customerId: "cm4w6bvp50002mhdtn8m1k2z6"  # Use existing customer ID
+            items:
+              - productId: "cm4w6bvp50003mhdtn8m1k2z7"  # Use existing product ID
+                quantity: 2
+                price: 100
+            notes: "Load test order"
+
+# Performance expectations
+expectations:
+  - http.response_time.p95: 2000  # 95% of requests should complete within 2 seconds
+  - http.response_time.p99: 5000  # 99% of requests should complete within 5 seconds
+  - http.codes.200: 80            # At least 80% of requests should be successful
+  - http.codes.201: 15            # Allow for creation endpoints
+  - http.codes.401: 5             # Some auth failures are expected
+
+# Reporting
+output:
+  - type: html
+    path: ./load-test-report.html
+  - type: json
+    path: ./load-test-results.json 

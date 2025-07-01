@@ -191,12 +191,12 @@ export class ProductService {
       });
 
       // Check for low stock and emit alert if needed
-      if (newQuantity <= (product.minStock || 0) && newQuantity > 0) {
+      if (newQuantity <= (product.minQuantity || 0) && newQuantity > 0) {
         socketService.emitLowStockAlert({
           productId: product.id,
           productName: product.name,
           currentStock: newQuantity,
-          minStock: product.minStock || 0,
+          minStock: product.minQuantity || 0,
         });
       }
 
