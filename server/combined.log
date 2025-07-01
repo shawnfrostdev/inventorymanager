@@ -440,3 +440,11 @@
 {"level":"info","message":"Server is running on port 5000","timestamp":"2025-07-01T18:37:36.132Z"}
 {"level":"info","message":"CORS enabled for http://localhost:3000","timestamp":"2025-07-01T18:37:36.135Z"}
 {"level":"info","message":"SMTP server is ready to send emails","timestamp":"2025-07-01T18:37:38.827Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-07-01T19:01:47.040Z"}
+{"level":"info","message":"CORS enabled for http://localhost:3000","timestamp":"2025-07-01T19:01:47.044Z"}
+{"level":"info","message":"SMTP server is ready to send emails","timestamp":"2025-07-01T19:01:49.236Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-07-01T19:01:56.096Z"}
+{"level":"info","message":"CORS enabled for http://localhost:3000","timestamp":"2025-07-01T19:01:56.098Z"}
+{"level":"info","message":"Server is running on port 5000","timestamp":"2025-07-01T19:01:57.015Z"}
+{"level":"info","message":"CORS enabled for http://localhost:3000","timestamp":"2025-07-01T19:01:57.020Z"}
+{"level":"info","message":"SMTP server is ready to send emails","timestamp":"2025-07-01T19:01:59.923Z"}

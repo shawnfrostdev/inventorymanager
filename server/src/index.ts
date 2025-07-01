@@ -4,6 +4,8 @@ import dotenv from 'dotenv';
 import authRoutes from './routes/auth.routes';
 import productRoutes from './routes/product.routes';
 import orderRoutes from './routes/order.routes';
+import locationRoutes from './routes/location.routes';
+import transferRoutes from './routes/transfer.routes';
 import { errorHandler } from './middleware/errorHandler';
 import { logger } from './utils/logger';
 
@@ -24,6 +26,8 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api', orderRoutes);
+app.use('/api/locations', locationRoutes);
+app.use('/api/transfers', transferRoutes);
 
 // Error handling
 app.use(errorHandler);
