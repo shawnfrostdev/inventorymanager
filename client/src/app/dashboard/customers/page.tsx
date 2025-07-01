@@ -54,7 +54,7 @@ export default function CustomersPage() {
       if (filters.search) params.append('search', filters.search);
       if (filters.isActive !== '') params.append('isActive', filters.isActive);
 
-      const response = await apiClient.get(`/customers?${params.toString()}`);
+      const response = await apiClient.get(`/api/customers?${params.toString()}`);
       if (response.ok) {
         const data = await response.json();
         setCustomers(data.data.customers || []);
@@ -71,7 +71,7 @@ export default function CustomersPage() {
 
   const createCustomer = async () => {
     try {
-      const response = await apiClient.post('/customers', newCustomer);
+      const response = await apiClient.post('/api/customers', newCustomer);
 
       if (response.ok) {
         setShowNewCustomerModal(false);
@@ -98,7 +98,7 @@ export default function CustomersPage() {
 
   const toggleCustomerStatus = async (customerId: string, isActive: boolean) => {
     try {
-      const response = await apiClient.put(`/customers/${customerId}`, { isActive: !isActive });
+      const response = await apiClient.put(`/api/customers/${customerId}`, { isActive: !isActive });
 
       if (response.ok) {
         fetchCustomers();

@@ -73,7 +73,7 @@ export default function OrdersPage() {
       if (filters.paymentStatus) params.append('paymentStatus', filters.paymentStatus);
       if (filters.search) params.append('search', filters.search);
 
-      const response = await apiClient.get(`/orders?${params.toString()}`);
+      const response = await apiClient.get(`/api/orders?${params.toString()}`);
       if (response.ok) {
         const data = await response.json();
         setOrders(data.data.orders || []);
@@ -90,7 +90,7 @@ export default function OrdersPage() {
 
   const fetchStats = async () => {
     try {
-      const response = await apiClient.get('/orders/stats');
+      const response = await apiClient.get('/api/orders/stats');
       if (response.ok) {
         const data = await response.json();
         setStats(data.data.stats);
@@ -102,7 +102,7 @@ export default function OrdersPage() {
 
   const updateOrderStatus = async (orderId: string, status: string) => {
     try {
-      const response = await apiClient.put(`/orders/${orderId}`, { status });
+      const response = await apiClient.put(`/api/orders/${orderId}`, { status });
 
       if (response.ok) {
         fetchOrders(); // Refresh the list
