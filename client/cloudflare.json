@@ -1,0 +1,51 @@
+{
+  "zone_id": "$CLOUDFLARE_ZONE_ID",
+  "routes": [
+    {
+      "pattern": "/*",
+      "zone_name": "invenage.com",
+      "cache": {
+        "browser": {
+          "ttl": 0
+        },
+        "edge": {
+          "ttl": 60,
+          "stale_ttl": 600
+        }
+      },
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "pattern": "/api/*",
+      "zone_name": "invenage.com",
+      "cache": {
+        "browser": {
+          "ttl": 0
+        },
+        "edge": {
+          "ttl": 0
+        }
+      },
+      "headers": {
+        "Cache-Control": "no-store"
+      }
+    },
+    {
+      "pattern": "/_next/static/*",
+      "zone_name": "invenage.com",
+      "cache": {
+        "browser": {
+          "ttl": 31536000
+        },
+        "edge": {
+          "ttl": 31536000
+        }
+      },
+      "headers": {
+        "Cache-Control": "public, max-age=31536000, immutable"
+      }
+    }
+  ]
+} 
